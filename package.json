@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "^16.2.0",
     "@angular/router": "^16.2.0",
     "@ngneat/until-destroy": "^10.0.0",
+    "@ngrx/effects": "^16.2.0",
     "@ngrx/store": "^16.2.0",
     "json-server": "^0.17.4",
     "rxjs": "~7.8.0",
@@ -46,6 +47,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "nx": "16.9.1",
     "nx-cloud": "latest",
+    "prettier": "3.0.3",
     "typescript": "~5.1.3"
   }
 }

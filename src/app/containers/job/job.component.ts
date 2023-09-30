@@ -1,12 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-job',
   templateUrl: './job.component.html',
-  styleUrls: ['./job.component.css']
+  styleUrls: ['./job.component.css'],
 })
-export class JobComponent implements OnInit{
-
-  ngOnInit(): void {
-  }
+export class JobComponent implements OnInit {
+  ngOnInit(): void {}
 }

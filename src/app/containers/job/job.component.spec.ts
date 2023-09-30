@@ -2,9 +2,11 @@ import { TestBed } from '@angular/core/testing';
 import { JobComponent } from './job.component';
 
 describe('AppComponent', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    declarations: [JobComponent]
-  }));
+  beforeEach(() =>
+    TestBed.configureTestingModule({
+      declarations: [JobComponent],
+    }),
+  );
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(JobComponent);

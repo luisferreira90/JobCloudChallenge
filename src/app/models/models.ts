@@ -44,3 +44,14 @@ export interface InvoiceDto extends Invoice {
   updatedAt: Date;
   _embedded: unknown;
 }
+
+export interface JobsListPageParams {
+  page: number;
+  pageSize: number;
+  filters?: JobsListPageParamsFilters;
+}
+
+interface JobsListPageParamsFilters {
+  status: JobAdStatus;
+  query: string;
+}
