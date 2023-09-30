@@ -4,19 +4,20 @@ import { NgModule } from '@angular/core';
 const projectRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'jobs-list',
+    redirectTo: 'jobs',
     pathMatch: 'full',
   },
   {
-    path: 'jobs-list',
+    path: 'jobs',
     loadChildren: () =>
       import('./containers/jobs-list/jobs-list.module').then((m) => m.JobsListModule),
   },
   {
-    path: 'job',
+    path: 'jobs/:id',
     loadChildren: () => import('./containers/job/job.module').then((m) => m.JobModule),
   },
 ];
+
 @NgModule({
   imports: [RouterModule.forRoot(projectRoutes, {})],
   exports: [RouterModule],
