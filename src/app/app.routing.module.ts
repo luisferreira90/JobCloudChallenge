@@ -4,13 +4,13 @@ import {NgModule} from "@angular/core";
 const projectRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'jobs',
+    redirectTo: 'jobs-list',
     pathMatch: 'full',
   },
   {
-    path: 'jobs',
-    loadChildren: () => import('./containers/jobs/jobs.module').then(
-        (m) => m.JobsModule,
+    path: 'jobs-list',
+    loadChildren: () => import('./containers/jobs-list/jobs-list.module').then(
+        (m) => m.JobsListModule,
       ),
   },
   {
