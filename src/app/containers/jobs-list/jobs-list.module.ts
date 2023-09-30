@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {JobsListComponent} from './jobs-list.component';
 import {RouterModule, RouterOutlet, Routes} from "@angular/router";
 import {MatTableModule} from "@angular/material/table";
+import {JobsListService} from "./store/jobs-list.service";
 
 const routes: Routes = [
   {
@@ -19,6 +20,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatTableModule,
   ],
-  providers: [],
+  providers: [JobsListService],
 })
 export class JobsListModule { }
