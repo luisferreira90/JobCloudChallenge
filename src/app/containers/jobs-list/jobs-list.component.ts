@@ -5,7 +5,11 @@ import { JobsListPageParams } from '../../models/models';
 import { selectJobsList, selectJobsListTotalCount } from './store';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
+import { FormControl } from '@angular/forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 
+@UntilDestroy()
 @Component({
   selector: 'app-jobs-list',
   templateUrl: './jobs-list.component.html',
@@ -15,9 +19,10 @@ export class JobsListComponent implements OnInit {
   jobsList$ = this._jobsListStore.select(selectJobsList);
   totalCount$ = this._jobsListStore.select(selectJobsListTotalCount);
   displayedColumns: string[] = ['id', 'title', 'status', 'options'];
+  searchQuery = new FormControl('');
 
   jobsListParams: JobsListPageParams = {
-    page: 1,
+    page: 0,
     pageSize: 10,
   };
 
@@ -25,6 +30,7 @@ export class JobsListComponent implements OnInit {
 
   ngOnInit(): void {
     this._getJobsList();
+    this._listenToSearchQuery();
   }
 
   sortChange(sortEvent: Sort): void {
@@ -33,12 +39,14 @@ export class JobsListComponent implements OnInit {
         ...this.jobsListParams,
         sort: sortEvent.active,
         order: sortEvent.direction,
+        page: 0,
       };
     } else {
       this.jobsListParams = {
         ...this.jobsListParams,
         sort: undefined,
         order: undefined,
+        page: 0,
       };
     }
 
@@ -48,11 +56,24 @@ export class JobsListComponent implements OnInit {
   pageChange(paginationEvent: PageEvent): void {
     this.jobsListParams = {
       ...this.jobsListParams,
-      page: paginationEvent.pageIndex,
+      // json-server pages start at 1, while Angular Material's Paginator starts at 0. Hence the +1
+      page: paginationEvent.pageIndex + 1,
       pageSize: paginationEvent.pageSize,
     };
 
     this._getJobsList();
+  }
+
+  private _listenToSearchQuery(): void {
+    this.searchQuery.valueChanges
+      .pipe(untilDestroyed(this), debounceTime(300), distinctUntilChanged())
+      .subscribe((query) => {
+        this.jobsListParams = {
+          ...this.jobsListParams,
+          query: query || '',
+        };
+        this._getJobsList();
+      });
   }
 
   private _getJobsList(): void {

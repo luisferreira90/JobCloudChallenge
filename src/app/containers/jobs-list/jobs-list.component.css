@@ -1,7 +1,14 @@
+.filters {
+    display: flex;
+    max-width: 560px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
 a {
-  color: white;
+    color: white;
 }
 
 td {
-  text-transform: capitalize;
+    text-transform: capitalize;
 }

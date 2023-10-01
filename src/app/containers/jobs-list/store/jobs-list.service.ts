@@ -20,6 +20,9 @@ export class JobsListService {
       urlSearchParams.set('_sort', params.sort);
       urlSearchParams.set('_order', params.order);
     }
+    if (params.query) {
+      urlSearchParams.set('title_like', params.query);
+    }
 
     return <Observable<JobAdsListResponse>>(
       this._httpClient

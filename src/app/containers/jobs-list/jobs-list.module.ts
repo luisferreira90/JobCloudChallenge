@@ -10,6 +10,9 @@ import { StoreModule } from '@ngrx/store';
 import { jobsListFeatureKey, jobsListReducer } from './store/jobs-list.reducer';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -29,6 +32,9 @@ const routes: Routes = [
     StoreModule.forFeature(jobsListFeatureKey, jobsListReducer),
     MatPaginatorModule,
     MatSortModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
   ],
   providers: [JobsListService],
 })
