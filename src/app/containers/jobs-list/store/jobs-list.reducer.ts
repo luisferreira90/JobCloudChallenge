@@ -16,7 +16,7 @@ export enum JobsListStateEvents {
 export interface JobsListState {
   jobsList: JobAd[];
   totalCount: number;
-  jobListParams: JobsListPageParams;
+  jobsListParams: JobsListPageParams;
   event: JobsListStateEvents;
   error: string;
 }
@@ -24,7 +24,7 @@ export interface JobsListState {
 export const initialState: JobsListState = {
   jobsList: [],
   totalCount: 0,
-  jobListParams: {
+  jobsListParams: {
     page: 1,
     pageSize: 10,
   },

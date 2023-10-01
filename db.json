@@ -144,19 +144,6 @@
       "status": "published"
     },
     {
-      "id": 26,
-      "title": "Civil Engineer",
-      "description": "enable innovative web services",
-      "skills": [
-        "HSS",
-        "UNIX Utilities",
-        "Yacc",
-        "Oracle BPM",
-        "Whisky"
-      ],
-      "status": "archived"
-    },
-    {
       "id": 27,
       "title": "Senior Developer",
       "description": "exploit cross-media web-readiness",
@@ -662,19 +649,6 @@
         "SNMP"
       ],
       "status": "draft"
-    },
-    {
-      "id": 67,
-      "title": "Nurse",
-      "description": "integrate cross-media mindshare",
-      "skills": [
-        "SAP PP",
-        "Sales Management",
-        "NLTK",
-        "RDL",
-        "SFE"
-      ],
-      "status": "archived"
     },
     {
       "id": 68,

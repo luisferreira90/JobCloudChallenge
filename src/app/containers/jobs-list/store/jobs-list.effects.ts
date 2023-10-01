@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import { JobsListService } from './jobs-list.service';
 import {
@@ -14,14 +14,17 @@ import {
   updateJobAdStatusSuccess,
 } from './jobs-list.actions';
 import { of } from 'rxjs';
+import { JobsListState } from './jobs-list.reducer';
+import { Store } from '@ngrx/store';
+import { selectJobsListParams } from './jobs-list.selector';
 
 @Injectable()
 export class JobsListEffects {
   loadJobsList$ = createEffect(() =>
-    this.actions$.pipe(
+    this._actions$.pipe(
       ofType(getJobsList),
       exhaustMap((action) =>
-        this.jobsListService.getJobsList(action.params).pipe(
+        this._jobsListService.getJobsList(action.params).pipe(
           map((jobsList) => getJobsListSuccess({ jobsListResponse: jobsList })),
           catchError((error) => of(getJobsListError({ errorMessage: error }))),
         ),
@@ -30,12 +33,13 @@ export class JobsListEffects {
   );
 
   deleteJobAd$ = createEffect(() =>
-    this.actions$.pipe(
+    this._actions$.pipe(
       ofType(deleteJobAd),
       exhaustMap((action) =>
-        this.jobsListService.deleteJobAd(action.id).pipe(
+        this._jobsListService.deleteJobAd(action.id).pipe(
           map(() => deleteJobAdSuccess()),
-          map(() => getJobsList({ params: action.params })),
+          concatLatestFrom(() => this._store.select(selectJobsListParams)),
+          map(([action, jobsListParams]) => getJobsList({ params: jobsListParams })),
           catchError((error) => of(deleteJobAdError({ errorMessage: error }))),
         ),
       ),
@@ -43,10 +47,10 @@ export class JobsListEffects {
   );
 
   updateJobAdStatus$ = createEffect(() =>
-    this.actions$.pipe(
+    this._actions$.pipe(
       ofType(updateJobAdStatus),
       exhaustMap((action) =>
-        this.jobsListService.updateJobAdStatus(action.jobAd).pipe(
+        this._jobsListService.updateJobAdStatus(action.jobAd).pipe(
           map((jobAd) => updateJobAdStatusSuccess({ jobAd })),
           catchError((error) => of(updateJobAdStatusError({ errorMessage: error }))),
         ),
@@ -55,7 +59,8 @@ export class JobsListEffects {
   );
 
   constructor(
-    private actions$: Actions,
-    private jobsListService: JobsListService,
+    private readonly _actions$: Actions,
+    private readonly _jobsListService: JobsListService,
+    private readonly _store: Store<JobsListState>,
   ) {}
 }
