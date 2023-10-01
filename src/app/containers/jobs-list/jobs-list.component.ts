@@ -11,6 +11,7 @@ import { selectJobsList } from './store';
 })
 export class JobsListComponent implements OnInit {
   jobsList$ = this._jobsListStore.select(selectJobsList);
+  displayedColumns: string[] = ['id', 'title', 'status', 'options'];
 
   jobsListParams: JobsListPageParams = {
     page: 1,

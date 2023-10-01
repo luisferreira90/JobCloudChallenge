@@ -5,7 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { JobsListService } from './store/jobs-list.service';
 import { EffectsModule } from '@ngrx/effects';
 import { JobsListEffects } from './store/jobs-list.effects';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { jobsListFeatureKey, jobsListReducer } from './store/jobs-list.reducer';
 
@@ -19,13 +19,12 @@ const routes: Routes = [
 @NgModule({
   declarations: [JobsListComponent],
   imports: [
+    CommonModule,
     RouterOutlet,
-    RouterModule.forChild(routes),
     MatTableModule,
+    RouterModule.forChild(routes),
     EffectsModule.forFeature(JobsListEffects),
     StoreModule.forFeature(jobsListFeatureKey, jobsListReducer),
-    AsyncPipe,
-    JsonPipe,
   ],
   providers: [JobsListService],
 })
