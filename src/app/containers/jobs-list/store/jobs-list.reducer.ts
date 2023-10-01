@@ -6,12 +6,14 @@ export const jobsListFeatureKey = 'jobsList';
 
 export interface JobsListState {
   jobsList: JobAd[];
+  totalCount: number;
   jobListParams: JobsListPageParams;
   error: string;
 }
 
 export const initialState: JobsListState = {
   jobsList: [],
+  totalCount: 0,
   jobListParams: {
     page: 1,
     pageSize: 10,
@@ -21,11 +23,12 @@ export const initialState: JobsListState = {
 
 export const jobsListReducer = createReducer(
   initialState,
-  on(JobsListActions.getJobsList, (state) => ({ ...state, jobsList: [] })),
+  on(JobsListActions.getJobsList, (state) => ({ ...state })),
 
   on(JobsListActions.getJobsListSuccess, (state, action) => ({
     ...state,
-    jobsList: action.jobsList,
+    jobsList: action.jobsListResponse.jobAds,
+    totalCount: action.jobsListResponse.totalCount,
   })),
 
   on(JobsListActions.getJobsListError, (state, action) => ({

@@ -7,12 +7,12 @@ import { of } from 'rxjs';
 
 @Injectable()
 export class JobsListEffects {
-  loadMovies$ = createEffect(() =>
+  loadJobsList$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getJobsList),
-      exhaustMap(() =>
-        this.jobsListService.getJobsList().pipe(
-          map((jobsList) => getJobsListSuccess({ jobsList: jobsList })),
+      exhaustMap((action) =>
+        this.jobsListService.getJobsList(action.params).pipe(
+          map((jobsList) => getJobsListSuccess({ jobsListResponse: jobsList })),
           catchError((error) => of(getJobsListError({ errorMessage: error }))),
         ),
       ),

@@ -8,6 +8,8 @@ import { JobsListEffects } from './store/jobs-list.effects';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { jobsListFeatureKey, jobsListReducer } from './store/jobs-list.reducer';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 const routes: Routes = [
   {
@@ -25,6 +27,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     EffectsModule.forFeature(JobsListEffects),
     StoreModule.forFeature(jobsListFeatureKey, jobsListReducer),
+    MatPaginatorModule,
+    MatSortModule,
   ],
   providers: [JobsListService],
 })

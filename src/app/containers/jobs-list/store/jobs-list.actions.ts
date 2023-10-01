@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { JobAd, JobsListPageParams } from '../../../models/models';
+import { JobAdsListResponse, JobsListPageParams } from '../../../models/models';
 
 export const getJobsList = createAction(
   '[Jobs List Page] Get Jobs List',
@@ -8,7 +8,7 @@ export const getJobsList = createAction(
 
 export const getJobsListSuccess = createAction(
   '[Jobs List Page] Get Jobs List Success',
-  props<{ jobsList: JobAd[] }>(),
+  props<{ jobsListResponse: JobAdsListResponse }>(),
 );
 
 export const getJobsListError = createAction(
