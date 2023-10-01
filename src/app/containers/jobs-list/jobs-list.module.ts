@@ -24,10 +24,10 @@ const routes: Routes = [
     RouterOutlet,
     JobsListFiltersComponent,
     JobsListTableComponent,
+    JobsListPaginatorComponent,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(JobsListEffects),
     StoreModule.forFeature(jobsListFeatureKey, jobsListReducer),
-    JobsListPaginatorComponent,
   ],
 })
 export class JobsListModule {}

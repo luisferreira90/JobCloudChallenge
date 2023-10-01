@@ -27,7 +27,7 @@ export class JobsListFiltersComponent implements OnInit {
   @Input()
   jobsListParams: JobsListPageParams;
   @Output()
-  updateParams = new EventEmitter<JobsListPageParams>();
+  updateParams = new EventEmitter<Partial<JobsListPageParams>>();
 
   searchQuery = new FormControl('');
   statusFilter = new FormControl('');
@@ -41,11 +41,7 @@ export class JobsListFiltersComponent implements OnInit {
     this.searchQuery.valueChanges
       .pipe(untilDestroyed(this), debounceTime(300), distinctUntilChanged())
       .subscribe((query) => {
-        this.jobsListParams = {
-          ...this.jobsListParams,
-          query: query || '',
-        };
-        this.updateParams.emit(this.jobsListParams);
+        this.updateParams.emit({ query: query });
       });
   }
 
@@ -53,11 +49,7 @@ export class JobsListFiltersComponent implements OnInit {
     this.statusFilter.valueChanges
       .pipe(untilDestroyed(this), distinctUntilChanged())
       .subscribe((status) => {
-        this.jobsListParams = {
-          ...this.jobsListParams,
-          status: <JobAdStatus>status,
-        };
-        this.updateParams.emit(this.jobsListParams);
+        this.updateParams.emit({ status: <JobAdStatus>status });
       });
   }
 }
