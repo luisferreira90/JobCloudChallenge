@@ -8,10 +8,8 @@
                      [jobsList]="jobsList$ | async">
 </app-jobs-list-table>
 
-<mat-paginator (page)="pageChange($event)"
-               [length]="totalCount$ | async"
-               [pageIndex]="jobsListParams.page"
-               [pageSizeOptions]="[10, 25, 50, 100]"
-               [pageSize]="jobsListParams.pageSize"
-               aria-label="Select page of job ads">
-</mat-paginator>
+<app-jobs-list-paginator (updateParams)="updateParams($event)"
+                         [jobsListParams]="jobsListParams"
+                         [totalCount]="totalCount$ | async">
+</app-jobs-list-paginator>
+

@@ -3,7 +3,6 @@ import { getJobsList } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
 import { JobsListPageParams } from '../../models/models';
 import { selectJobsList, selectJobsListTotalCount } from './store';
-import { PageEvent } from '@angular/material/paginator';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -24,17 +23,6 @@ export class JobsListComponent implements OnInit {
   constructor(private _jobsListStore: Store) {}
 
   ngOnInit(): void {
-    this._getJobsList();
-  }
-
-  pageChange(paginationEvent: PageEvent): void {
-    this.jobsListParams = {
-      ...this.jobsListParams,
-      // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
-      page: paginationEvent.pageIndex + 1,
-      pageSize: paginationEvent.pageSize,
-    };
-
     this._getJobsList();
   }
 

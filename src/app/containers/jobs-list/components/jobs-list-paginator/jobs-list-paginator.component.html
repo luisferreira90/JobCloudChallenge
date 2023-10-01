@@ -1,0 +1,7 @@
+<mat-paginator (page)="pageChange($event)"
+               [length]="totalCount"
+               [pageIndex]="jobsListParams.page"
+               [pageSizeOptions]="[10, 25, 50, 100]"
+               [pageSize]="jobsListParams.pageSize"
+               aria-label="Select page of job ads">
+</mat-paginator>
