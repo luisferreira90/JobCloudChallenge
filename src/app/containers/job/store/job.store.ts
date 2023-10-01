@@ -25,14 +25,14 @@ interface JobAdUpdaterParams {
 
 @Injectable()
 export class JobStore extends ComponentStore<JobState> {
-  constructor(private readonly _jobService: JobService) {
-    super({ jobAd: <JobAd>{}, action: JobStateActions.NO_ACTION });
-  }
-
+  readonly jobState$: Observable<JobState> = this.select((state) => state);
   readonly jobAction$: Observable<JobStateActions> = this.select((state) => state.action);
-
   readonly jobAd$: Observable<JobAd> = this.select((state) => state.jobAd);
-
+  readonly updaterJobAd = this.updater((state, params: JobAdUpdaterParams) => ({
+    ...state,
+    jobAd: params.jobAd,
+    action: params.action,
+  }));
   readonly getJobAd = this.effect((jobAdId$: Observable<number>) => {
     return jobAdId$.pipe(
       switchMap((id) =>
@@ -48,7 +48,7 @@ export class JobStore extends ComponentStore<JobState> {
     );
   });
 
-  readonly createJobAd = this.effect((newJobAd$: Observable<JobAd>) => {
+  readonly createJobAd = this.effect((newJobAd$: Observable<Partial<JobAd>>) => {
     return newJobAd$.pipe(
       switchMap((newJobAd) =>
         this._jobService.createJob(newJobAd).pipe(
@@ -93,11 +93,9 @@ export class JobStore extends ComponentStore<JobState> {
     );
   });
 
-  readonly updaterJobAd = this.updater((state, params: JobAdUpdaterParams) => ({
-    ...state,
-    jobAd: params.jobAd,
-    action: params.action,
-  }));
+  constructor(private readonly _jobService: JobService) {
+    super({ jobAd: <JobAd>{}, action: JobStateActions.NO_ACTION });
+  }
 
   logError(error: string) {
     return error;

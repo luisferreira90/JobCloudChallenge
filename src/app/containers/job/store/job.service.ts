@@ -9,11 +9,13 @@ const API_URL = 'http://localhost:3000/jobs';
   providedIn: 'root',
 })
 export class JobService {
+  constructor(private readonly _httpClient: HttpClient) {}
+
   getJob(id: number): Observable<JobAd> {
     return <Observable<JobAd>>this._httpClient.get(`${API_URL}/${id}`);
   }
 
-  createJob(params: JobAd): Observable<JobAd> {
+  createJob(params: Partial<JobAd>): Observable<JobAd> {
     return <Observable<JobAd>>this._httpClient.post(`${API_URL}`, { ...params });
   }
 
@@ -24,6 +26,4 @@ export class JobService {
   deleteJob(id: number): Observable<any> {
     return <Observable<JobAd>>this._httpClient.delete(`${API_URL}/${id}`);
   }
-
-  constructor(private readonly _httpClient: HttpClient) {}
 }
