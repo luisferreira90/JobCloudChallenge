@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { JobAd, JobAdsListResponse, JobsListPageParams } from '../../../models/models';
 import { map } from 'rxjs/operators';
 
+const API_URL = 'http://localhost:3000/jobs';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +16,8 @@ export class JobsListService {
     const urlSearchParams = new URLSearchParams();
 
     // TODO: Add this into a map to not have to handle each parameter
-    urlSearchParams.set('_page', params.page.toString());
+    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
+    urlSearchParams.set('_page', (params.page + 1).toString());
     urlSearchParams.set('_limit', params.pageSize.toString());
     if (params.sort && params.order) {
       urlSearchParams.set('_sort', params.sort);
@@ -29,7 +32,7 @@ export class JobsListService {
 
     return <Observable<JobAdsListResponse>>(
       this._httpClient
-        .get(`http://localhost:3000/jobs?${urlSearchParams.toString()}`, { observe: 'response' })
+        .get(`${API_URL}?${urlSearchParams.toString()}`, { observe: 'response' })
         .pipe(
           map((response) => {
             // Due to the nature of json-server, we need to get this header to know the total job ads we have
@@ -40,5 +43,9 @@ export class JobsListService {
           }),
         )
     );
+  }
+
+  deleteJobAd(id: number): Observable<any> {
+    return <Observable<JobAd>>this._httpClient.delete(`${API_URL}/${id}`);
   }
 }

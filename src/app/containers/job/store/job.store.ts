@@ -78,21 +78,6 @@ export class JobStore extends ComponentStore<JobState> {
     );
   });
 
-  readonly deleteJobAd = this.effect((id$: Observable<number>) => {
-    return id$.pipe(
-      switchMap((id) =>
-        this._jobService.deleteJob(id).pipe(
-          tap({
-            next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_DELETED }),
-            error: (e) => this.logError(e),
-          }),
-          // 👇 Handle potential error within inner pipe.
-          catchError(() => EMPTY),
-        ),
-      ),
-    );
-  });
-
   constructor(private readonly _jobService: JobService) {
     super({ jobAd: <JobAd>{}, action: JobStateActions.NO_ACTION });
   }

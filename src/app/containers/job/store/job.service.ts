@@ -22,8 +22,4 @@ export class JobService {
   updateJob(params: Partial<JobAd>): Observable<JobAd> {
     return <Observable<JobAd>>this._httpClient.put(`${API_URL}/${params.id}`, { ...params });
   }
-
-  deleteJob(id: number): Observable<any> {
-    return <Observable<JobAd>>this._httpClient.delete(`${API_URL}/${id}`);
-  }
 }

@@ -5,7 +5,8 @@
       "description": "This is a test description",
       "skills": [
         "Yamaha Digital Consoles",
-        "Umbrella Insurance"
+        "Umbrella Insurance",
+        "Testing JavaScript"
       ],
       "status": "published",
       "id": 1
@@ -50,17 +51,16 @@
       "status": "draft"
     },
     {
-      "id": 5,
       "title": "Research Nurse",
       "description": "leverage seamless solutions",
       "skills": [
         "CTI",
-        "TMX",
         "E-commerce",
         "JRun",
         "NSPS"
       ],
-      "status": "archived"
+      "status": "archived",
+      "id": 5
     },
     {
       "id": 6,
@@ -1324,13 +1324,6 @@
       "skills": null,
       "status": "draft",
       "id": 104
-    },
-    {
-      "title": "asfasfasf",
-      "description": "",
-      "skills": null,
-      "status": "draft",
-      "id": 105
     }
   ]
 }

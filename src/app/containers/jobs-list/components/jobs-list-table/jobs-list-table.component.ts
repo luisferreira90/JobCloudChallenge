@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 const DEFAULT_SORT: Partial<JobsListPageParams> = {
   sort: undefined,
@@ -18,7 +21,15 @@ const DEFAULT_SORT: Partial<JobsListPageParams> = {
   templateUrl: './jobs-list-table.component.html',
   styleUrls: ['./jobs-list-table.component.css'],
   standalone: true,
-  imports: [CommonModule, MatSortModule, MatTableModule, RouterLink],
+  imports: [
+    CommonModule,
+    MatSortModule,
+    MatTableModule,
+    RouterLink,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JobsListTableComponent {
@@ -28,6 +39,8 @@ export class JobsListTableComponent {
   jobsListParams: JobsListPageParams;
   @Output()
   updateParams = new EventEmitter<Partial<JobsListPageParams>>();
+  @Output()
+  deleteJobAd = new EventEmitter<number>();
 
   displayedColumns: string[] = ['id', 'title', 'status', 'options'];
 

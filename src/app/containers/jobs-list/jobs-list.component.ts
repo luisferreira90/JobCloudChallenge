@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getJobsList } from './store/jobs-list.actions';
+import { deleteJobAd, getJobsList } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
 import { JobsListPageParams } from '../../models/models';
 import { selectJobsList, selectJobsListAction, selectJobsListTotalCount } from './store';
@@ -38,6 +38,10 @@ export class JobsListComponent implements OnInit {
     };
 
     this._getJobsList();
+  }
+
+  deleteJobAd(id: number) {
+    this._jobsListStore.dispatch(deleteJobAd({ id }));
   }
 
   private _getJobsList(): void {

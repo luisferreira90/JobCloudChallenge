@@ -4,34 +4,63 @@
        mat-table
        matSort>
 
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
-        <td *matCellDef="let element" mat-cell>
-            <a [routerLink]="['/job/' + element.id]">{{element.id}}</a>
-        </td>
-    </ng-container>
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
+    <td *matCellDef="let element" mat-cell>
+      <a [routerLink]="['/job/' + element.id]">{{element.id}}</a>
+    </td>
+  </ng-container>
 
-    <!-- Title Column -->
-    <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Title</th>
-        <td *matCellDef="let element" mat-cell>
-            <a [routerLink]="['/job/' + element.id]">{{element.title}}</a>
-        </td>
-    </ng-container>
+  <!-- Title Column -->
+  <ng-container matColumnDef="title">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header>Title</th>
+    <td *matCellDef="let element" mat-cell>
+      <a [routerLink]="['/job/' + element.id]">{{element.title}}</a>
+    </td>
+  </ng-container>
 
-    <!-- Status Column -->
-    <ng-container matColumnDef="status">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
-        <td *matCellDef="let element" mat-cell> {{element.status}} </td>
-    </ng-container>
+  <!-- Status Column -->
+  <ng-container matColumnDef="status">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+    <td *matCellDef="let element" mat-cell> {{element.status}} </td>
+  </ng-container>
 
-    <!-- Options Column -->
-    <ng-container matColumnDef="options">
-        <th *matHeaderCellDef mat-header-cell></th>
-        <td *matCellDef="let element" mat-cell></td>
-    </ng-container>
+  <!-- Options Column -->
+  <ng-container matColumnDef="options">
+    <th *matHeaderCellDef mat-header-cell></th>
+    <td *matCellDef="let element" mat-cell>
+      <button [matMenuTriggerData]="{jobAd: element}"
+              [matMenuTriggerFor]="jobAdMenu"
+              aria-label="Job Ad Options"
+              mat-icon-button>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </td>
+  </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
 </table>
+
+<mat-menu #jobAdMenu="matMenu">
+  <ng-template let-jobAd="jobAd" matMenuContent>
+    <button *ngIf="jobAd.status === 'draft'"
+            mat-menu-item>
+      <mat-icon>publish</mat-icon>
+      <span>Publish</span>
+    </button>
+
+    <button *ngIf="jobAd.status === 'published'"
+            mat-menu-item>
+      <mat-icon>archive</mat-icon>
+      <span>Archive</span>
+    </button>
+
+    <button (click)="deleteJobAd.emit(jobAd.id)"
+            mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+  </ng-template>
+</mat-menu>

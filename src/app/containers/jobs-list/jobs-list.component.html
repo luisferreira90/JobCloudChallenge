@@ -6,7 +6,8 @@
                        [jobsListParams]="jobsListParams">
 </app-jobs-list-filters>
 
-<app-jobs-list-table (updateParams)="updateParams($event)"
+<app-jobs-list-table (deleteJobAd)="deleteJobAd($event)"
+                     (updateParams)="updateParams($event)"
                      [jobsList]="jobsList$ | async">
 </app-jobs-list-table>
 

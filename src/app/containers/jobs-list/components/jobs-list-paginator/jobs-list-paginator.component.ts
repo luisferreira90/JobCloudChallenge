@@ -25,8 +25,7 @@ export class JobsListPaginatorComponent {
 
   pageChange(paginationEvent: PageEvent): void {
     const newPageParams = {
-      // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
-      page: paginationEvent.pageIndex + 1,
+      page: paginationEvent.pageIndex,
       pageSize: paginationEvent.pageSize,
     };
 

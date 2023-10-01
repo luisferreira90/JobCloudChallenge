@@ -115,5 +115,8 @@ export class JobComponent implements OnInit {
 
   private _setupForm(jobAd: JobAd): void {
     this.jobAdForm.patchValue({ ...jobAd });
+    if (jobAd.status === 'archived') {
+      this.jobAdForm.disable();
+    }
   }
 }
