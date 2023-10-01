@@ -1,0 +1,6 @@
+.filters {
+    display: flex;
+    max-width: 560px;
+    flex-wrap: wrap;
+    gap: 10px;
+}

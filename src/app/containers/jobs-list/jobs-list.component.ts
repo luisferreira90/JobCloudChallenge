@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { getJobsList } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
-import { JobAdStatus, JobsListPageParams } from '../../models/models';
+import { JobsListPageParams } from '../../models/models';
 import { selectJobsList, selectJobsListTotalCount } from './store';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
 import { FormControl } from '@angular/forms';
-import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
 @Component({
@@ -31,8 +30,6 @@ export class JobsListComponent implements OnInit {
 
   ngOnInit(): void {
     this._getJobsList();
-    this._listenToSearchQuery();
-    this._listenToStatusFilter();
   }
 
   sortChange(sortEvent: Sort): void {
@@ -66,32 +63,13 @@ export class JobsListComponent implements OnInit {
     this._getJobsList();
   }
 
-  filterByStatus(event: any) {
-    console.log(event);
-  }
+  updateParams(params: Partial<JobsListPageParams>): void {
+    this.jobsListParams = {
+      ...this.jobsListParams,
+      ...params,
+    };
 
-  private _listenToSearchQuery(): void {
-    this.searchQuery.valueChanges
-      .pipe(untilDestroyed(this), debounceTime(300), distinctUntilChanged())
-      .subscribe((query) => {
-        this.jobsListParams = {
-          ...this.jobsListParams,
-          query: query || '',
-        };
-        this._getJobsList();
-      });
-  }
-
-  private _listenToStatusFilter(): void {
-    this.statusFilter.valueChanges
-      .pipe(untilDestroyed(this), distinctUntilChanged())
-      .subscribe((status) => {
-        this.jobsListParams = {
-          ...this.jobsListParams,
-          status: <JobAdStatus>status || '',
-        };
-        this._getJobsList();
-      });
+    this._getJobsList();
   }
 
   private _getJobsList(): void {
