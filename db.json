@@ -1,70 +1,6 @@
 {
   "jobs": [
     {
-      "title": "Research Nurse",
-      "description": "leverage seamless solutions",
-      "skills": [
-        "CTI",
-        "E-commerce",
-        "JRun",
-        "NSPS"
-      ],
-      "status": "archived",
-      "id": 5
-    },
-    {
-      "id": 7,
-      "title": "Structural Analysis Engineer",
-      "description": "disintermediate out-of-the-box platforms",
-      "skills": [
-        "Two-factor Authentication",
-        "TS2",
-        "Assisting Others",
-        "Security Clearance",
-        "Wellbeing"
-      ],
-      "status": "archived"
-    },
-    {
-      "id": 9,
-      "title": "Database Administrator IV",
-      "description": "scale open-source infomediaries",
-      "skills": [
-        "SWAT",
-        "Bank-owned Properties",
-        "WBEM",
-        "Juvenile Law",
-        "Visual Basic"
-      ],
-      "status": "archived"
-    },
-    {
-      "id": 10,
-      "title": "VP Sales",
-      "description": "innovate bleeding-edge models",
-      "skills": [
-        "WTX",
-        "Blueprint Reading",
-        "Consumer Behaviour",
-        "WML",
-        "HF"
-      ],
-      "status": "archived"
-    },
-    {
-      "id": 11,
-      "title": "Desktop Support Technician",
-      "description": "facilitate holistic e-business",
-      "skills": [
-        "TBMCS",
-        "Business Development",
-        "USB",
-        "DDoS",
-        "Helicopters"
-      ],
-      "status": "archived"
-    },
-    {
       "id": 12,
       "title": "Chemical Engineer",
       "description": "innovate impactful architectures",
@@ -75,7 +11,7 @@
         "SketchUp",
         "Oenology"
       ],
-      "status": "draft"
+      "status": "published"
     },
     {
       "id": 13,
@@ -154,19 +90,6 @@
         "SDI"
       ],
       "status": "published"
-    },
-    {
-      "id": 19,
-      "title": "Analyst Programmer",
-      "description": "embrace efficient partnerships",
-      "skills": [
-        "MSC Adams",
-        "MM7",
-        "IAX",
-        "Airworthiness",
-        "Sales Management"
-      ],
-      "status": "archived"
     },
     {
       "id": 20,

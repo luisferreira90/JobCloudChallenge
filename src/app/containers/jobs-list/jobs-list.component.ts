@@ -6,6 +6,7 @@ import { selectJobsList, selectJobsListAction, selectJobsListTotalCount } from '
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, Subject } from 'rxjs';
 import { JobsListStateEvents } from './store/jobs-list.reducer';
+import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.service';
 
 @UntilDestroy()
 @Component({
@@ -24,7 +25,10 @@ export class JobsListComponent implements OnInit {
     pageSize: 10,
   };
 
-  constructor(private _jobsListStore: Store) {}
+  constructor(
+    private readonly _jobsListStore: Store,
+    private readonly _snackBarService: SnackBarService,
+  ) {}
 
   ngOnInit(): void {
     this._getJobsList();
@@ -57,10 +61,23 @@ export class JobsListComponent implements OnInit {
     this.action$
       .pipe(
         untilDestroyed(this),
-        filter((action) => action === JobsListStateEvents.JOB_LIST_LOADED),
+        filter((action) => action !== JobsListStateEvents.NO_ACTION),
       )
-      .subscribe((r) => {
-        this.isLoading$.next(false);
+      .subscribe((action) => {
+        switch (action) {
+          case JobsListStateEvents.JOB_LIST_LOADED:
+            this.isLoading$.next(false);
+            break;
+          case JobsListStateEvents.JOB_DELETED:
+            this._snackBarService.displayMessage('Job Ad deleted');
+            break;
+          case JobsListStateEvents.ERROR:
+            this._snackBarService.displayMessage('An error as occurred');
+            break;
+          case JobsListStateEvents.JOB_STATUS_UPDATED:
+            this._snackBarService.displayMessage('Job Ad status updated successfully');
+            break;
+        }
       });
   }
 }
