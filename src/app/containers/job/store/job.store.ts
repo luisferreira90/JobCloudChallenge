@@ -63,7 +63,7 @@ export class JobStore extends ComponentStore<JobState> {
     );
   });
 
-  readonly updateJobAd = this.effect((updatedJobAd$: Observable<JobAd>) => {
+  readonly updateJobAd = this.effect((updatedJobAd$: Observable<Partial<JobAd>>) => {
     return updatedJobAd$.pipe(
       switchMap((updatedJobAd) =>
         this._jobService.updateJob(updatedJobAd).pipe(

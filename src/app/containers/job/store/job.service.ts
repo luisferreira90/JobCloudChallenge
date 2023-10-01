@@ -19,7 +19,7 @@ export class JobService {
     return <Observable<JobAd>>this._httpClient.post(`${API_URL}`, { ...params });
   }
 
-  updateJob(params: JobAd): Observable<JobAd> {
+  updateJob(params: Partial<JobAd>): Observable<JobAd> {
     return <Observable<JobAd>>this._httpClient.put(`${API_URL}/${params.id}`, { ...params });
   }
 

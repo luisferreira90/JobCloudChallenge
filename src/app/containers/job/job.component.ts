@@ -18,6 +18,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class JobComponent implements OnInit {
   jobAd$ = this._jobStore.jobAd$;
 
+  currentJobAdId: number;
+
   jobAdForm = this._fb.group({
     title: ['', Validators.required],
     description: [''],
@@ -54,18 +56,23 @@ export class JobComponent implements OnInit {
   removeSkill(skill: string) {}
 
   onSubmit() {
-    const jobAd: JobAd = {
+    const jobAd: Partial<JobAd> = {
       ...this.jobAdForm.getRawValue(),
-      id: null,
       status: <JobAdStatus>this.jobAdForm.get('status').value,
     };
-    this._jobStore.createJobAd(jobAd);
+
+    if (this.currentJobAdId) {
+      jobAd.id = this.currentJobAdId;
+      this._jobStore.updateJobAd(jobAd);
+    } else {
+      this._jobStore.createJobAd(jobAd);
+    }
   }
 
   private _loadJobAd(): void {
-    const jobAdId = this._route.snapshot.params['id'];
-    if (jobAdId) {
-      this._jobStore.getJobAd(jobAdId);
+    this.currentJobAdId = this._route.snapshot.params['id'];
+    if (this.currentJobAdId) {
+      this._jobStore.getJobAd(this.currentJobAdId);
     }
   }
 
@@ -76,7 +83,7 @@ export class JobComponent implements OnInit {
           this._setupForm(state.jobAd);
           break;
         case JobStateActions.JOB_CREATED:
-          this._handleJobCreation(state.jobAd);
+          this._handleJobCreationSuccess(state.jobAd);
           break;
         case JobStateActions.JOB_UPDATED:
           this._displayMessage('Job successfully updated');
@@ -85,7 +92,7 @@ export class JobComponent implements OnInit {
     });
   }
 
-  private _handleJobCreation(newJobAd: JobAd): void {
+  private _handleJobCreationSuccess(newJobAd: JobAd): void {
     this._displayMessage('Job successfully created');
     this._router.navigate(['job', newJobAd.id]).then(() => console.log('Navigated to new job'));
   }
