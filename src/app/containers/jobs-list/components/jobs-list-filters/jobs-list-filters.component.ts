@@ -41,7 +41,7 @@ export class JobsListFiltersComponent implements OnInit {
     this.searchQuery.valueChanges
       .pipe(untilDestroyed(this), debounceTime(300), distinctUntilChanged())
       .subscribe((query) => {
-        this.updateParams.emit({ query: query });
+        this.updateParams.emit({ query: query, page: 0 });
       });
   }
 
@@ -49,7 +49,7 @@ export class JobsListFiltersComponent implements OnInit {
     this.statusFilter.valueChanges
       .pipe(untilDestroyed(this), distinctUntilChanged())
       .subscribe((status) => {
-        this.updateParams.emit({ status: <JobAdStatus>status });
+        this.updateParams.emit({ status: <JobAdStatus>status, page: 0 });
       });
   }
 }
