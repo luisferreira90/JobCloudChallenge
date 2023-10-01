@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { deleteJobAd, getJobsList, updateJobAdStatus } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
 import { JobAd, JobsListPageParams } from '../../models/models';
-import { selectJobsList, selectJobsListAction, selectJobsListTotalCount } from './store';
+import { selectJobsListAction, selectJobsListPageViewModel } from './store/jobs-list.selector';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JobsListStateEvents } from './store/jobs-list.reducer';
 import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.service';
@@ -14,9 +14,8 @@ import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.servi
   styleUrls: ['./jobs-list.component.css'],
 })
 export class JobsListComponent implements OnInit {
-  jobsList$ = this._jobsListStore.select(selectJobsList);
-  totalCount$ = this._jobsListStore.select(selectJobsListTotalCount);
-  action$ = this._jobsListStore.select(selectJobsListAction);
+  readonly vm$ = this._jobsListStore.select(selectJobsListPageViewModel);
+  readonly action$ = this._jobsListStore.select(selectJobsListAction);
 
   jobsListParams: JobsListPageParams = {
     page: 0,

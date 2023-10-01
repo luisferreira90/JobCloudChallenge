@@ -13,3 +13,12 @@ export const selectJobsListTotalCount = createSelector(
   selectJobsListState,
   (state) => state.totalCount,
 );
+
+export const selectJobsListPageViewModel = createSelector(
+  selectJobsList,
+  selectJobsListTotalCount,
+  (jobsList, totalCount) => ({
+    jobsList,
+    totalCount,
+  }),
+);

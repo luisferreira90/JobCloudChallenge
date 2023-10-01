@@ -1,16 +1,18 @@
-<h1>Jobs List</h1>
-<app-jobs-list-filters (updateParams)="updateParams($event)"
-                       [jobsListParams]="jobsListParams">
-</app-jobs-list-filters>
+<ng-container *ngrxLet="vm$ as vm">
+  <h1>Jobs List</h1>
 
-<app-jobs-list-table (changeJobAdStatus)="changeJobAdStatus($event)"
-                     (deleteJobAd)="deleteJobAd($event)"
-                     (updateParams)="updateParams($event)"
-                     [jobsList]="jobsList$ | async">
-</app-jobs-list-table>
+  <app-jobs-list-filters (updateParams)="updateParams($event)"
+                         [jobsListParams]="jobsListParams">
+  </app-jobs-list-filters>
 
-<app-jobs-list-paginator (updateParams)="updateParams($event)"
-                         [jobsListParams]="jobsListParams"
-                         [totalCount]="totalCount$ | async">
-</app-jobs-list-paginator>
+  <app-jobs-list-table (changeJobAdStatus)="changeJobAdStatus($event)"
+                       (deleteJobAd)="deleteJobAd($event)"
+                       (updateParams)="updateParams($event)"
+                       [jobsList]="vm.jobsList">
+  </app-jobs-list-table>
 
+  <app-jobs-list-paginator (updateParams)="updateParams($event)"
+                           [jobsListParams]="jobsListParams"
+                           [totalCount]="vm.totalCount">
+  </app-jobs-list-paginator>
+</ng-container>

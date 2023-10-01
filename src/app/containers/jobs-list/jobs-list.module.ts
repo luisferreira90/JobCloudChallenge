@@ -10,6 +10,7 @@ import { JobsListFiltersComponent } from './components/jobs-list-filters/jobs-li
 import { JobsListTableComponent } from './components/jobs-list-table/jobs-list-table.component';
 import { JobsListPaginatorComponent } from './components/jobs-list-paginator/jobs-list-paginator.component';
 import { SnackBarModule } from '../../shared/services/snack-bar/snack-bar.module';
+import { LetDirective } from '@ngrx/component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     EffectsModule.forFeature(JobsListEffects),
     StoreModule.forFeature(jobsListFeatureKey, jobsListReducer),
+    LetDirective,
   ],
 })
 export class JobsListModule {}
