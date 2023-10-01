@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <button [matMenuTriggerFor]="mainMenu"
+          aria-label="Main menu"
+          mat-icon-button>
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <mat-menu #mainMenu="matMenu">
+    <a [routerLink]="['jobs']"
+       mat-menu-item>
+      <mat-icon>list_alt</mat-icon>
+      <span>Job List</span>
+    </a>
+
+    <a [routerLink]="['invoices']"
+       mat-menu-item>
+      <mat-icon>receipt_long</mat-icon>
+      <span>Invoices</span>
+    </a>
+  </mat-menu>
+
+  <span>Jobs</span>
+</mat-toolbar>

@@ -8,6 +8,7 @@ import { RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
+import { HeaderComponent } from './shared/components/header/header.component';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,10 +18,10 @@ import { EffectsModule } from '@ngrx/effects';
     RouterOutlet,
     HttpClientModule,
     AppRoutingModule,
+    HeaderComponent,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
