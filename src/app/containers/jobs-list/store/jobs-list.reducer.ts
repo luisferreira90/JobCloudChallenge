@@ -4,8 +4,12 @@ import * as JobsListActions from './jobs-list.actions';
 
 export const jobsListFeatureKey = 'jobsList';
 
-export enum JobsListStateActions {
+export enum JobsListStateEvents {
   JOB_LIST_LOADED,
+  JOB_DELETED,
+  JOB_STATUS_UPDATED,
+
+  ERROR,
   NO_ACTION,
 }
 
@@ -13,7 +17,7 @@ export interface JobsListState {
   jobsList: JobAd[];
   totalCount: number;
   jobListParams: JobsListPageParams;
-  action: JobsListStateActions;
+  event: JobsListStateEvents;
   error: string;
 }
 
@@ -24,26 +28,42 @@ export const initialState: JobsListState = {
     page: 1,
     pageSize: 10,
   },
-  action: JobsListStateActions.NO_ACTION,
+  event: JobsListStateEvents.NO_ACTION,
   error: '',
 };
 
 export const jobsListReducer = createReducer(
   initialState,
-  on(JobsListActions.getJobsList, (state) => ({
-    ...state,
-    action: JobsListStateActions.NO_ACTION,
-  })),
-
   on(JobsListActions.getJobsListSuccess, (state, action) => ({
     ...state,
     jobsList: action.jobsListResponse.jobAds,
     totalCount: action.jobsListResponse.totalCount,
-    action: JobsListStateActions.JOB_LIST_LOADED,
+    event: JobsListStateEvents.JOB_LIST_LOADED,
   })),
 
   on(JobsListActions.getJobsListError, (state, action) => ({
     ...state,
     error: action.errorMessage,
+    event: JobsListStateEvents.ERROR,
+  })),
+
+  on(JobsListActions.deleteJobAdSuccess, (state, action) => ({
+    ...state,
+    event: JobsListStateEvents.JOB_DELETED,
+  })),
+
+  on(JobsListActions.deleteJobAdError, (state, action) => ({
+    ...state,
+    event: JobsListStateEvents.ERROR,
+  })),
+
+  on(JobsListActions.updateJobAdStatusSuccess, (state, action) => ({
+    ...state,
+    event: JobsListStateEvents.JOB_STATUS_UPDATED,
+  })),
+
+  on(JobsListActions.updateJobAdStatusError, (state, action) => ({
+    ...state,
+    event: JobsListStateEvents.ERROR,
   })),
 );

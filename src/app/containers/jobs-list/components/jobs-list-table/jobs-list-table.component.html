@@ -45,13 +45,15 @@
 
 <mat-menu #jobAdMenu="matMenu">
   <ng-template let-jobAd="jobAd" matMenuContent>
-    <button *ngIf="jobAd.status === 'draft'"
+    <button (click)="statusChanged(jobAd, 'published')"
+            *ngIf="jobAd.status === 'draft'"
             mat-menu-item>
       <mat-icon>publish</mat-icon>
       <span>Publish</span>
     </button>
 
-    <button *ngIf="jobAd.status === 'published'"
+    <button (click)="statusChanged(jobAd, 'archived')"
+            *ngIf="jobAd.status === 'published'"
             mat-menu-item>
       <mat-icon>archive</mat-icon>
       <span>Archive</span>

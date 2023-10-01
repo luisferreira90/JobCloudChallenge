@@ -9,6 +9,9 @@ import {
   getJobsList,
   getJobsListError,
   getJobsListSuccess,
+  updateJobAdStatus,
+  updateJobAdStatusError,
+  updateJobAdStatusSuccess,
 } from './jobs-list.actions';
 import { of } from 'rxjs';
 
@@ -31,8 +34,20 @@ export class JobsListEffects {
       ofType(deleteJobAd),
       exhaustMap((action) =>
         this.jobsListService.deleteJobAd(action.id).pipe(
-          map((jobsList) => deleteJobAdSuccess({ jobsListResponse: jobsList })),
+          map(() => deleteJobAdSuccess()),
           catchError((error) => of(deleteJobAdError({ errorMessage: error }))),
+        ),
+      ),
+    ),
+  );
+
+  updateJobAdStatus$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateJobAdStatus),
+      exhaustMap((action) =>
+        this.jobsListService.updateJobAdStatus(action.jobAd).pipe(
+          map((jobAd) => updateJobAdStatusSuccess({ jobAd })),
+          catchError((error) => of(updateJobAdStatusError({ errorMessage: error }))),
         ),
       ),
     ),

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { deleteJobAd, getJobsList } from './store/jobs-list.actions';
+import { deleteJobAd, getJobsList, updateJobAdStatus } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
-import { JobsListPageParams } from '../../models/models';
+import { JobAd, JobsListPageParams } from '../../models/models';
 import { selectJobsList, selectJobsListAction, selectJobsListTotalCount } from './store';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { filter, Subject } from 'rxjs';
-import { JobsListStateActions } from './store/jobs-list.reducer';
+import { JobsListStateEvents } from './store/jobs-list.reducer';
 
 @UntilDestroy()
 @Component({
@@ -40,6 +40,10 @@ export class JobsListComponent implements OnInit {
     this._getJobsList();
   }
 
+  changeJobAdStatus(jobAd: JobAd): void {
+    this._jobsListStore.dispatch(updateJobAdStatus({ jobAd }));
+  }
+
   deleteJobAd(id: number) {
     this._jobsListStore.dispatch(deleteJobAd({ id }));
   }
@@ -53,7 +57,7 @@ export class JobsListComponent implements OnInit {
     this.action$
       .pipe(
         untilDestroyed(this),
-        filter((action) => action === JobsListStateActions.JOB_LIST_LOADED),
+        filter((action) => action === JobsListStateEvents.JOB_LIST_LOADED),
       )
       .subscribe((r) => {
         this.isLoading$.next(false);

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { JobAd, JobsListPageParams } from '../../../../models/models';
+import { JobAd, JobAdStatus, JobsListPageParams } from '../../../../models/models';
 import { CommonModule } from '@angular/common';
 import { MatSortModule, Sort } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
@@ -41,6 +41,8 @@ export class JobsListTableComponent {
   updateParams = new EventEmitter<Partial<JobsListPageParams>>();
   @Output()
   deleteJobAd = new EventEmitter<number>();
+  @Output()
+  changeJobAdStatus = new EventEmitter<JobAd>();
 
   displayedColumns: string[] = ['id', 'title', 'status', 'options'];
 
@@ -55,5 +57,9 @@ export class JobsListTableComponent {
     newSort.page = 0;
 
     this.updateParams.emit(newSort);
+  }
+
+  statusChanged(jobAd: JobAd, status: JobAdStatus): void {
+    this.changeJobAdStatus.emit({ ...jobAd, status });
   }
 }

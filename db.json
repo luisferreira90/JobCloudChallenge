@@ -1,56 +1,6 @@
 {
   "jobs": [
     {
-      "title": "Marketing Assistant - Senior",
-      "description": "This is a test description",
-      "skills": [
-        "Yamaha Digital Consoles",
-        "Umbrella Insurance",
-        "Testing JavaScript"
-      ],
-      "status": "published",
-      "id": 1
-    },
-    {
-      "id": 2,
-      "title": "Senior Financial Analyst",
-      "description": "envisioneer visionary e-markets",
-      "skills": [
-        "Veneers",
-        "Mergers &amp; Acquisitions",
-        "CWNA",
-        "Global Health",
-        "Rational DOORS"
-      ],
-      "status": "published"
-    },
-    {
-      "id": 3,
-      "title": "Administrative Assistant IV",
-      "description": "revolutionize global technologies",
-      "skills": [
-        "Electric Utility",
-        "Lean Manufacturing",
-        "Agents",
-        "ePub",
-        "Performing Arts"
-      ],
-      "status": "published"
-    },
-    {
-      "id": 4,
-      "title": "VP Accounting",
-      "description": "strategize viral web-readiness",
-      "skills": [
-        "Pain Management",
-        "Close Protection",
-        "Natural Resource Management",
-        "Ethernet",
-        "MCEV"
-      ],
-      "status": "draft"
-    },
-    {
       "title": "Research Nurse",
       "description": "leverage seamless solutions",
       "skills": [
@@ -61,19 +11,6 @@
       ],
       "status": "archived",
       "id": 5
-    },
-    {
-      "id": 6,
-      "title": "Software Test Engineer II",
-      "description": "productize dynamic mindshare",
-      "skills": [
-        "Kuka",
-        "MRO Management",
-        "Key Performance Indicators",
-        "WPF",
-        "Renewable Energy"
-      ],
-      "status": "published"
     },
     {
       "id": 7,
@@ -87,19 +24,6 @@
         "Wellbeing"
       ],
       "status": "archived"
-    },
-    {
-      "id": 8,
-      "title": "Nuclear Power Engineer",
-      "description": "expedite value-added functionalities",
-      "skills": [
-        "Key Person Insurance",
-        "Aquaculture",
-        "LDO",
-        "BMPs",
-        "Curriculum Development"
-      ],
-      "status": "published"
     },
     {
       "id": 9,
@@ -138,7 +62,7 @@
         "DDoS",
         "Helicopters"
       ],
-      "status": "published"
+      "status": "archived"
     },
     {
       "id": 12,

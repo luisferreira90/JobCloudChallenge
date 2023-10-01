@@ -5,7 +5,7 @@ export const featureKey = 'jobsList';
 
 export const selectJobsListState = createFeatureSelector<JobsListState>(featureKey);
 
-export const selectJobsListAction = createSelector(selectJobsListState, (state) => state.action);
+export const selectJobsListAction = createSelector(selectJobsListState, (state) => state.event);
 
 export const selectJobsList = createSelector(selectJobsListState, (state) => state.jobsList);
 

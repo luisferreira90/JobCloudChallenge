@@ -45,7 +45,11 @@ export class JobsListService {
     );
   }
 
-  deleteJobAd(id: number): Observable<any> {
+  deleteJobAd(id: number): Observable<object> {
     return <Observable<JobAd>>this._httpClient.delete(`${API_URL}/${id}`);
+  }
+
+  updateJobAdStatus(jobAd: JobAd): Observable<JobAd> {
+    return <Observable<JobAd>>this._httpClient.put(`${API_URL}/${jobAd.id}`, { ...jobAd });
   }
 }
