@@ -13,7 +13,11 @@ const projectRoutes: Routes = [
       import('./containers/jobs-list/jobs-list.module').then((m) => m.JobsListModule),
   },
   {
-    path: 'jobs/:id',
+    path: 'job',
+    loadChildren: () => import('./containers/job/job.module').then((m) => m.JobModule),
+  },
+  {
+    path: 'job/:id',
     loadChildren: () => import('./containers/job/job.module').then((m) => m.JobModule),
   },
 ];

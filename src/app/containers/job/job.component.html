@@ -1,3 +1,34 @@
-<h1>Single Job</h1>
+<form [formGroup]="jobAdForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput
+           formControlName="title">
+  </mat-form-field>
 
-{{(jobAd$ | async)?.description}}
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea matInput
+              formControlName="title">
+    </textarea>
+  </mat-form-field>
+
+  <!--  <mat-form-field class="skills">-->
+  <!--    <mat-label>Skills</mat-label>-->
+  <!--    <mat-chip-grid #skillGrid aria-label="Enter skills">-->
+  <!--      <mat-chip-row *ngFor="let skill of jobAdForm.get('skills')"-->
+  <!--                    (removed)="removeSkill(skill)">-->
+  <!--        {{skill}}-->
+  <!--        <button matChipRemove [attr.aria-label]="'remove ' + skill">-->
+  <!--          <mat-icon>cancel</mat-icon>-->
+  <!--        </button>-->
+  <!--      </mat-chip-row>-->
+  <!--      <input placeholder="New skill"-->
+  <!--             [matChipInputFor]="skillGrid"-->
+  <!--             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+  <!--             [matChipInputAddOnBlur]="true"-->
+  <!--             (matChipInputTokenEnd)="addSkill($event)"/>-->
+  <!--    </mat-chip-grid>-->
+  <!--  </mat-form-field>-->
+
+  <button mat-raised-button color="primary">{{ (jobAd$ | async)?.id ? 'Update Job Ad' : 'Create New Job Ad' }}</button>
+</form>
