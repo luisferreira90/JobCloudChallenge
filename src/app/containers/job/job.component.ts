@@ -43,17 +43,29 @@ export class JobComponent implements OnInit {
   }
 
   addSkill(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+    const currentValues = this.jobAdForm.controls.skills.value;
+    const newValue = (event.value || '').trim();
 
-    // if (value) {
-    //   this.jobAdForm.patchValue('skills').push({ name: value });
-    // }
+    if (currentValues.includes(newValue)) {
+      this._displayMessage('You have already added this skill to this job ad');
+      return;
+    }
 
-    // Clear the input value
+    if (newValue) {
+      this.jobAdForm.controls.skills.patchValue([...currentValues, newValue]);
+    }
+
     event.chipInput!.clear();
   }
 
-  removeSkill(skill: string) {}
+  removeSkill(skillToBeRemoved: string) {
+    const currentValues = this.jobAdForm.controls.skills.value;
+    currentValues.splice(
+      currentValues.findIndex((skill: string) => skill === skillToBeRemoved),
+      1,
+    );
+    this.jobAdForm.controls.skills.patchValue([...currentValues]);
+  }
 
   onSubmit() {
     const jobAd: Partial<JobAd> = {
