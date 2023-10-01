@@ -18,8 +18,6 @@ export class JobsListPaginatorComponent {
   jobsListParams: JobsListPageParams;
   @Input()
   totalCount: number;
-  @Input()
-  isLoading = false;
   @Output()
   updateParams = new EventEmitter<Partial<JobsListPageParams>>();
 

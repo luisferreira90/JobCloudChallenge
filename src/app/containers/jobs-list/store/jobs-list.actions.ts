@@ -16,7 +16,13 @@ export const getJobsListError = createAction(
   props<{ errorMessage: string }>(),
 );
 
-export const deleteJobAd = createAction('[Jobs List Page] Delete Job Ad', props<{ id: number }>());
+export const deleteJobAd = createAction(
+  '[Jobs List Page] Delete Job Ad',
+  props<{
+    id: number;
+    params: JobsListPageParams;
+  }>(),
+);
 
 export const deleteJobAdSuccess = createAction('[Jobs List Page] Delete Job Ad Success');
 

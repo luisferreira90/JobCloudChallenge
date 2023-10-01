@@ -9,8 +9,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { LetDirective } from '@ngrx/component';
+import { SnackBarModule } from '../../shared/services/snack-bar/snack-bar.module';
 
 const routes: Routes = [
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatSnackBarModule,
+    SnackBarModule,
     LetDirective,
   ],
   providers: [],

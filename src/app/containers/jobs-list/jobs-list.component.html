@@ -1,7 +1,4 @@
 <h1>Jobs List</h1>
-
-{{isLoading$ | async}}
-
 <app-jobs-list-filters (updateParams)="updateParams($event)"
                        [jobsListParams]="jobsListParams">
 </app-jobs-list-filters>
@@ -13,7 +10,6 @@
 </app-jobs-list-table>
 
 <app-jobs-list-paginator (updateParams)="updateParams($event)"
-                         [isLoading]="!!(isLoading$ | async)"
                          [jobsListParams]="jobsListParams"
                          [totalCount]="totalCount$ | async">
 </app-jobs-list-paginator>

@@ -6,7 +6,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JobAd, JobAdStatus } from '../../models/models';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.service';
 
 @UntilDestroy()
 @Component({
@@ -34,7 +34,7 @@ export class JobComponent implements OnInit {
     private readonly _route: ActivatedRoute,
     private readonly _router: Router,
     private readonly _fb: FormBuilder,
-    private readonly _snackBar: MatSnackBar,
+    private readonly _snackBarService: SnackBarService,
   ) {}
 
   ngOnInit() {
@@ -110,7 +110,7 @@ export class JobComponent implements OnInit {
   }
 
   private _displayMessage(message: string) {
-    this._snackBar.open(message, 'OK');
+    this._snackBarService.displayMessage(message);
   }
 
   private _setupForm(jobAd: JobAd): void {

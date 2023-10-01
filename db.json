@@ -40,7 +40,6 @@
       "status": "draft"
     },
     {
-      "id": 15,
       "title": "Editor",
       "description": "recontextualize front-end e-tailers",
       "skills": [
@@ -50,7 +49,8 @@
         "E-zines",
         "DVT"
       ],
-      "status": "published"
+      "status": "published",
+      "id": 15
     },
     {
       "id": 16,
@@ -92,19 +92,6 @@
       "status": "published"
     },
     {
-      "id": 20,
-      "title": "Professor",
-      "description": "monetize bricks-and-clicks e-services",
-      "skills": [
-        "XML Publisher",
-        "Accounting",
-        "Gnome",
-        "SDLC",
-        "Email Marketing"
-      ],
-      "status": "archived"
-    },
-    {
       "id": 21,
       "title": "Design Engineer",
       "description": "incentivize magnetic mindshare",
@@ -116,19 +103,6 @@
         "BCMS"
       ],
       "status": "draft"
-    },
-    {
-      "id": 22,
-      "title": "Staff Accountant I",
-      "description": "reinvent holistic systems",
-      "skills": [
-        "Medical Imaging",
-        "Gemba Kaizen",
-        "Construction Loans",
-        "Zenoss",
-        "BCA Protein Assay"
-      ],
-      "status": "archived"
     },
     {
       "id": 23,
@@ -248,19 +222,6 @@
       "status": "archived"
     },
     {
-      "id": 32,
-      "title": "Research Associate",
-      "description": "strategize sticky e-commerce",
-      "skills": [
-        "EPM",
-        "CTMS",
-        "Aerospace Medicine",
-        "EPM",
-        "Artistic Abilities"
-      ],
-      "status": "archived"
-    },
-    {
       "id": 33,
       "title": "Dental Hygienist",
       "description": "engineer transparent partnerships",
@@ -297,7 +258,7 @@
         "DNA Extraction",
         "Spanish"
       ],
-      "status": "draft"
+      "status": "published"
     },
     {
       "id": 36,
@@ -1164,13 +1125,6 @@
       "skills": null,
       "status": "draft",
       "id": 103
-    },
-    {
-      "title": "Creating",
-      "description": "",
-      "skills": null,
-      "status": "draft",
-      "id": 104
     }
   ]
 }

@@ -34,6 +34,11 @@ export const initialState: JobsListState = {
 
 export const jobsListReducer = createReducer(
   initialState,
+  on(JobsListActions.getJobsList, (state, action) => ({
+    ...state,
+    jobsListParams: action.params,
+  })),
+
   on(JobsListActions.getJobsListSuccess, (state, action) => ({
     ...state,
     jobsList: action.jobsListResponse.jobAds,

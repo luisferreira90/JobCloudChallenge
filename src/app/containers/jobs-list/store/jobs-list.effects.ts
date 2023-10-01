@@ -35,6 +35,7 @@ export class JobsListEffects {
       exhaustMap((action) =>
         this.jobsListService.deleteJobAd(action.id).pipe(
           map(() => deleteJobAdSuccess()),
+          map(() => getJobsList({ params: action.params })),
           catchError((error) => of(deleteJobAdError({ errorMessage: error }))),
         ),
       ),
