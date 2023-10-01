@@ -23,6 +23,9 @@ export class JobsListService {
     if (params.query) {
       urlSearchParams.set('title_like', params.query);
     }
+    if (params.status) {
+      urlSearchParams.set('status', params.status);
+    }
 
     return <Observable<JobAdsListResponse>>(
       this._httpClient

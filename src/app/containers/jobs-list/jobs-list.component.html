@@ -10,10 +10,11 @@
 
     <mat-form-field>
         <mat-label>Status</mat-label>
-        <mat-select>
-            <mat-option value="one">Published</mat-option>
-            <mat-option value="two">Draft</mat-option>
-            <mat-option value="two">Archived</mat-option>
+        <mat-select (selectionchange)="filterByStatus($event)"
+                    [formControl]="statusFilter">
+            <mat-option value="published">Published</mat-option>
+            <mat-option value="draft">Draft</mat-option>
+            <mat-option value="archived">Archived</mat-option>
         </mat-select>
     </mat-form-field>
 </div>

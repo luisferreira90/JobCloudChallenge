@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getJobsList } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
-import { JobsListPageParams } from '../../models/models';
+import { JobAdStatus, JobsListPageParams } from '../../models/models';
 import { selectJobsList, selectJobsListTotalCount } from './store';
 import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
@@ -20,6 +20,7 @@ export class JobsListComponent implements OnInit {
   totalCount$ = this._jobsListStore.select(selectJobsListTotalCount);
   displayedColumns: string[] = ['id', 'title', 'status', 'options'];
   searchQuery = new FormControl('');
+  statusFilter = new FormControl('');
 
   jobsListParams: JobsListPageParams = {
     page: 0,
@@ -31,6 +32,7 @@ export class JobsListComponent implements OnInit {
   ngOnInit(): void {
     this._getJobsList();
     this._listenToSearchQuery();
+    this._listenToStatusFilter();
   }
 
   sortChange(sortEvent: Sort): void {
@@ -56,12 +58,16 @@ export class JobsListComponent implements OnInit {
   pageChange(paginationEvent: PageEvent): void {
     this.jobsListParams = {
       ...this.jobsListParams,
-      // json-server pages start at 1, while Angular Material's Paginator starts at 0. Hence the +1
+      // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
       page: paginationEvent.pageIndex + 1,
       pageSize: paginationEvent.pageSize,
     };
 
     this._getJobsList();
+  }
+
+  filterByStatus(event: any) {
+    console.log(event);
   }
 
   private _listenToSearchQuery(): void {
@@ -71,6 +77,18 @@ export class JobsListComponent implements OnInit {
         this.jobsListParams = {
           ...this.jobsListParams,
           query: query || '',
+        };
+        this._getJobsList();
+      });
+  }
+
+  private _listenToStatusFilter(): void {
+    this.statusFilter.valueChanges
+      .pipe(untilDestroyed(this), distinctUntilChanged())
+      .subscribe((status) => {
+        this.jobsListParams = {
+          ...this.jobsListParams,
+          status: <JobAdStatus>status || '',
         };
         this._getJobsList();
       });
