@@ -58,8 +58,3 @@ export interface JobsListPageParams {
   sort?: string;
   order?: 'asc' | 'desc';
 }
-
-export interface JobAdStatusChange {
-  id: number;
-  status: JobAdStatus;
-}
