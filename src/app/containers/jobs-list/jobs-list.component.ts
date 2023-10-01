@@ -3,9 +3,7 @@ import { getJobsList } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
 import { JobsListPageParams } from '../../models/models';
 import { selectJobsList, selectJobsListTotalCount } from './store';
-import { Sort } from '@angular/material/sort';
 import { PageEvent } from '@angular/material/paginator';
-import { FormControl } from '@angular/forms';
 import { UntilDestroy } from '@ngneat/until-destroy';
 
 @UntilDestroy()
@@ -17,9 +15,6 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 export class JobsListComponent implements OnInit {
   jobsList$ = this._jobsListStore.select(selectJobsList);
   totalCount$ = this._jobsListStore.select(selectJobsListTotalCount);
-  displayedColumns: string[] = ['id', 'title', 'status', 'options'];
-  searchQuery = new FormControl('');
-  statusFilter = new FormControl('');
 
   jobsListParams: JobsListPageParams = {
     page: 0,
@@ -29,26 +24,6 @@ export class JobsListComponent implements OnInit {
   constructor(private _jobsListStore: Store) {}
 
   ngOnInit(): void {
-    this._getJobsList();
-  }
-
-  sortChange(sortEvent: Sort): void {
-    if (sortEvent.direction) {
-      this.jobsListParams = {
-        ...this.jobsListParams,
-        sort: sortEvent.active,
-        order: sortEvent.direction,
-        page: 0,
-      };
-    } else {
-      this.jobsListParams = {
-        ...this.jobsListParams,
-        sort: undefined,
-        order: undefined,
-        page: 0,
-      };
-    }
-
     this._getJobsList();
   }
 

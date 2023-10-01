@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
@@ -14,12 +21,13 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrls: ['./jobs-list-filters.component.css'],
   standalone: true,
   imports: [CommonModule, MatInputModule, MatSelectModule, ReactiveFormsModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class JobsListFiltersComponent implements OnInit {
   @Input()
   jobsListParams: JobsListPageParams;
   @Output()
-  updateFilters = new EventEmitter<JobsListPageParams>();
+  updateParams = new EventEmitter<JobsListPageParams>();
 
   searchQuery = new FormControl('');
   statusFilter = new FormControl('');
@@ -37,7 +45,7 @@ export class JobsListFiltersComponent implements OnInit {
           ...this.jobsListParams,
           query: query || '',
         };
-        this.updateFilters.emit(this.jobsListParams);
+        this.updateParams.emit(this.jobsListParams);
       });
   }
 
@@ -47,9 +55,9 @@ export class JobsListFiltersComponent implements OnInit {
       .subscribe((status) => {
         this.jobsListParams = {
           ...this.jobsListParams,
-          status: <JobAdStatus>status || '',
+          status: <JobAdStatus>status,
         };
-        this.updateFilters.emit(this.jobsListParams);
+        this.updateParams.emit(this.jobsListParams);
       });
   }
 }

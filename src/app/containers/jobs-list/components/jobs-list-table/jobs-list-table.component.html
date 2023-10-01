@@ -1,0 +1,37 @@
+<table (matSortChange)="sortChange($event)"
+       [dataSource]="jobsList"
+       class="mat-elevation-z8"
+       mat-table
+       matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
+        <td *matCellDef="let element" mat-cell>
+            <a [routerLink]="['/job/' + element.id]">{{element.id}}</a>
+        </td>
+    </ng-container>
+
+    <!-- Title Column -->
+    <ng-container matColumnDef="title">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Title</th>
+        <td *matCellDef="let element" mat-cell>
+            <a [routerLink]="['/job/' + element.id]">{{element.title}}</a>
+        </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
+        <td *matCellDef="let element" mat-cell> {{element.status}} </td>
+    </ng-container>
+
+    <!-- Options Column -->
+    <ng-container matColumnDef="options">
+        <th *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let element" mat-cell></td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>

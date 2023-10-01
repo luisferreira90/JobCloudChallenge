@@ -1,46 +1,12 @@
 <h1>Jobs List</h1>
 
-<app-jobs-list-filters (updateFilters)="updateParams($event)"
+<app-jobs-list-filters (updateParams)="updateParams($event)"
                        [jobsListParams]="jobsListParams">
 </app-jobs-list-filters>
 
-<table (matSortChange)="sortChange($event)"
-       [dataSource]="jobsList$"
-       class="mat-elevation-z8"
-       mat-table
-       matSort>
-
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>ID</th>
-        <td *matCellDef="let element" mat-cell>
-            <a [routerLink]="['/job/' + element.id]">{{element.id}}</a>
-        </td>
-    </ng-container>
-
-    <!-- Title Column -->
-    <ng-container matColumnDef="title">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Title</th>
-        <td *matCellDef="let element" mat-cell>
-            <a [routerLink]="['/job/' + element.id]">{{element.title}}</a>
-        </td>
-    </ng-container>
-
-    <!-- Status Column -->
-    <ng-container matColumnDef="status">
-        <th *matHeaderCellDef mat-header-cell mat-sort-header>Status</th>
-        <td *matCellDef="let element" mat-cell> {{element.status}} </td>
-    </ng-container>
-
-    <!-- Options Column -->
-    <ng-container matColumnDef="options">
-        <th *matHeaderCellDef mat-header-cell></th>
-        <td *matCellDef="let element" mat-cell></td>
-    </ng-container>
-
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-</table>
+<app-jobs-list-table (updateParams)="updateParams($event)"
+                     [jobsList]="jobsList$ | async">
+</app-jobs-list-table>
 
 <mat-paginator (page)="pageChange($event)"
                [length]="totalCount$ | async"
