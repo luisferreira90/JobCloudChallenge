@@ -30,10 +30,6 @@ package that implements end-to-end testing capabilities.
 To get more help on the Angular CLI use `ng help` or go check out
 the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
-# Angular Coding Challenge
-
-This challenge is designed to test your skills in Angular, NgRx, RxJS, Observables and resources.
-
 ## Challenge
 
 The application should have the following features:

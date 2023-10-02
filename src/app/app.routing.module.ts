@@ -14,11 +14,11 @@ const projectRoutes: Routes = [
   },
   {
     path: 'job',
-    loadChildren: () => import('./containers/job/job.module').then((m) => m.JobModule),
+    loadChildren: () => import('./containers/job/job-ad.module').then((m) => m.JobAdModule),
   },
   {
     path: 'job/:id',
-    loadChildren: () => import('./containers/job/job.module').then((m) => m.JobModule),
+    loadChildren: () => import('./containers/job/job-ad.module').then((m) => m.JobAdModule),
   },
   {
     path: 'invoices-list',

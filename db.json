@@ -1097,6 +1097,56 @@
       "skills": null,
       "status": "draft",
       "id": 103
+    },
+    {
+      "title": "Electrical Engineeraaaa",
+      "description": "facilitate interactive interfaces",
+      "skills": [
+        "Judo",
+        "Permanent Placement",
+        "VO",
+        "Sanction II",
+        "Kontakt"
+      ],
+      "status": "published",
+      "id": 104
+    },
+    {
+      "title": "Electrical Engineeraaaas",
+      "description": "facilitate interactive interfaces",
+      "skills": [
+        "Judo",
+        "Permanent Placement",
+        "VO",
+        "Sanction II",
+        "Kontakt"
+      ],
+      "status": "published",
+      "id": 105
+    },
+    {
+      "id": 106,
+      "title": "ID106 deverá funcionar",
+      "description": "Descrição também",
+      "skills": [
+        "Novos",
+        "skills",
+        "para",
+        "testar"
+      ],
+      "status": "published"
+    },
+    {
+      "id": 107,
+      "title": "este é novo",
+      "description": "vamos lá ver se funciona",
+      "skills": [
+        "estes",
+        "sao",
+        "mais",
+        "novos"
+      ],
+      "status": "draft"
     }
   ],
   "invoices": []

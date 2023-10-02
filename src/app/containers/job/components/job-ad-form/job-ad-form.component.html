@@ -1,4 +1,4 @@
-<ng-container *ngrxLet="jobAd$ as jobAd">
+<ng-container *ngIf="jobAdForm">
   <form (ngSubmit)="onSubmit()" [formGroup]="jobAdForm">
     <mat-form-field>
       <mat-label>Title</mat-label>
@@ -51,8 +51,8 @@
       </mat-chip-grid>
     </mat-form-field>
 
-    <button [disabled]="jobAdForm.disabled"
+    <button [disabled]="jobAdForm.disabled || jobAdForm.invalid || jobAdForm.pristine"
             color="primary"
-            mat-raised-button>{{ (jobAd$ | async)?.id ? 'Update Job Ad' : 'Create New Job Ad' }}</button>
+            mat-raised-button>{{ jobAd?.id ? 'Update Job Ad' : 'Create New Job Ad' }}</button>
   </form>
 </ng-container>

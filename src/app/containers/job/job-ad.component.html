@@ -1,0 +1,4 @@
+<ng-container *ngrxLet="jobAd$ as jobAd">
+  <app-job-ad-form (createUpdateJobAd)="createUpdateJobAd($event)"
+                   [jobAd]="jobAd"></app-job-ad-form>
+</ng-container>
