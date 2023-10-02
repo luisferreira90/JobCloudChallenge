@@ -92,7 +92,7 @@ export class JobAdFormComponent {
         [JobAdTitleValidator.createValidator(this._apiService)],
       ],
       description: [jobAd.description, Validators.required],
-      skills: [[...jobAd.skills]],
+      skills: [[...jobAd.skills], Validators.required],
       status: jobAd.status,
     });
 

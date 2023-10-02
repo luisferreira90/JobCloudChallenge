@@ -57,10 +57,6 @@ Here are some additional details :
 
 To complete this challenge, you will need to:
 
-3. Create a store for the job ads data.
-4. Create a resource for fetching and updating the job ads data.
-5. Create a view model for the job ads data.
-6. Create a component for creating and editing job ads.
 7. Create effects for triggering invoices.
 8. Test the application.
 
