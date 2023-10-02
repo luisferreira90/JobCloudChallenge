@@ -93,4 +93,19 @@ export class ApiService {
   deleteInvoice(id: number): Observable<object> {
     return <Observable<object>>this._httpClient.delete(`${API_URL}/invoices/${id}`);
   }
+
+  getJobTitleAlreadyExists(title: string): Observable<boolean> {
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.set('title', title);
+
+    return this._httpClient.get(`${API_URL}/jobs?${urlSearchParams.toString()}`).pipe(
+      map((response) => {
+        // The map always assumes an object. I need to create an HTTP handler to make this more
+        // straightforward, and not have to cast, but I am running out of time so for now
+        // I will cast directly, and focus on the other important bits
+        const castedResponse = <JobAd[]>(<unknown>response);
+        return castedResponse.length > 0;
+      }),
+    );
+  }
 }

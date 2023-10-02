@@ -7,6 +7,8 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JobAd, JobAdStatus } from '../../models/models';
 import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.service';
+import { JobAdTitleValidator } from './validators/same-name.validator';
+import { ApiService } from '../../shared/services/api/api.service';
 
 @UntilDestroy()
 @Component({
@@ -17,12 +19,11 @@ import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.servi
 })
 export class JobComponent implements OnInit {
   jobAd$ = this._jobStore.jobAd$;
-
   currentJobAdId: number;
 
   jobAdForm = this._fb.group({
-    title: ['', Validators.required],
-    description: ['', Validators.required, Validators.minLength(10)],
+    title: ['', Validators.required, [JobAdTitleValidator.createValidator(this._apiService)]],
+    description: ['', Validators.required],
     skills: [],
     status: 'draft',
   });
@@ -35,6 +36,7 @@ export class JobComponent implements OnInit {
     private readonly _router: Router,
     private readonly _fb: FormBuilder,
     private readonly _snackBarService: SnackBarService,
+    private readonly _apiService: ApiService,
   ) {}
 
   ngOnInit() {

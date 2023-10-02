@@ -4,13 +4,22 @@
       <mat-label>Title</mat-label>
       <input formControlName="title"
              matInput>
+
+      <mat-error *ngIf="jobAdForm.get('title').hasError('repeatedTitle')">
+        A job ad with this title already exists
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Description</mat-label>
       <textarea formControlName="description"
-                matInput>
+                matInput
+                minlength="10">
     </textarea>
+
+      <mat-error *ngIf="jobAdForm.get('description').hasError('minlength')">
+        The length of the description must be of at least 10 characters
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field>

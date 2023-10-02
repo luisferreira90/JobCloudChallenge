@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import { RouterOutlet } from '@angular/router';
 import { AppRoutingModule } from './app.routing.module';
-import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ApiModule } from './shared/services/api/api.module';
@@ -17,7 +16,6 @@ import { ApiModule } from './shared/services/api/api.module';
     BrowserModule,
     BrowserAnimationsModule,
     RouterOutlet,
-    HttpClientModule,
     AppRoutingModule,
     HeaderComponent,
     ApiModule,
