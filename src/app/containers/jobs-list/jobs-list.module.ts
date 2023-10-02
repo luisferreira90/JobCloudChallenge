@@ -28,10 +28,10 @@ const routes: Routes = [
     JobsListTableComponent,
     TablePaginatorComponent,
     SnackBarModule,
+    LetDirective,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(JobsListEffects),
     StoreModule.forFeature(jobsListFeatureKey, jobsListReducer),
-    LetDirective,
   ],
 })
 export class JobsListModule {}

@@ -40,8 +40,6 @@ The application should have the following features:
 
 Here are some additional details :
 
-- The `title`, `description`, and `skills` of a job ad are required fields.
-
 - When a job ad is deleted, all of its related data, such as the invoice, should also be deleted.
 
 - The due date of an invoice is calculated based on the date the job ad was published and the current month. For
@@ -61,10 +59,6 @@ To complete this challenge, you will need to:
 8. Test the application.
 
 ## Interfaces
-
-The `JobAd` interface defines the properties of a job ad. The `title` and `description` properties are required.
-The `skills` property is an array of strings. The `status` property can be one of three values: `draft`, `published`,
-or `archived`.
 
 The `Invoice` interface defines the properties of an invoice. The `jobAdId` property is the ID of the job ad that the
 invoice is for. The `amount` property is the amount of money due. The `dueDate` property is the date by which the
