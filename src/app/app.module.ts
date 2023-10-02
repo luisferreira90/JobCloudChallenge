@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { HeaderComponent } from './shared/components/header/header.component';
+import { ApiModule } from './shared/services/api/api.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,7 @@ import { HeaderComponent } from './shared/components/header/header.component';
     HttpClientModule,
     AppRoutingModule,
     HeaderComponent,
+    ApiModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
   ],

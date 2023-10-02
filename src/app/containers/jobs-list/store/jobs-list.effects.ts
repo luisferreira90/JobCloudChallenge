@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
-import { JobsListService } from './jobs-list.service';
 import {
   deleteJobAd,
   deleteJobAdError,
@@ -16,7 +15,8 @@ import {
 import { of } from 'rxjs';
 import { JobsListState } from './jobs-list.reducer';
 import { Store } from '@ngrx/store';
-import { selectJobsListParams } from './jobs-list.selector';
+import { selectJobsListParams } from './jobs-list.selectors';
+import { ApiService } from '../../../shared/services/api/api.service';
 
 @Injectable()
 export class JobsListEffects {
@@ -24,7 +24,7 @@ export class JobsListEffects {
     this._actions$.pipe(
       ofType(getJobsList),
       exhaustMap((action) =>
-        this._jobsListService.getJobsList(action.params).pipe(
+        this._apiService.getJobsList(action.params).pipe(
           map((jobsList) => getJobsListSuccess({ jobsListResponse: jobsList })),
           catchError((error) => of(getJobsListError({ errorMessage: error }))),
         ),
@@ -36,7 +36,7 @@ export class JobsListEffects {
     this._actions$.pipe(
       ofType(deleteJobAd),
       exhaustMap((action) =>
-        this._jobsListService.deleteJobAd(action.id).pipe(
+        this._apiService.deleteJobAd(action.id).pipe(
           map(() => deleteJobAdSuccess()),
           concatLatestFrom(() => this._store.select(selectJobsListParams)),
           map(([action, jobsListParams]) => getJobsList({ params: jobsListParams })),
@@ -50,7 +50,7 @@ export class JobsListEffects {
     this._actions$.pipe(
       ofType(updateJobAdStatus),
       exhaustMap((action) =>
-        this._jobsListService.updateJobAdStatus(action.jobAd).pipe(
+        this._apiService.updateJob(action.jobAd).pipe(
           map((jobAd) => updateJobAdStatusSuccess({ jobAd })),
           catchError((error) => of(updateJobAdStatusError({ errorMessage: error }))),
         ),
@@ -60,7 +60,7 @@ export class JobsListEffects {
 
   constructor(
     private readonly _actions$: Actions,
-    private readonly _jobsListService: JobsListService,
+    private readonly _apiService: ApiService,
     private readonly _store: Store<JobsListState>,
   ) {}
 }

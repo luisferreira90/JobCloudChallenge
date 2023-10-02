@@ -27,6 +27,11 @@ export interface JobAdsListResponse {
   totalCount: number;
 }
 
+export interface InvoiceListResponse {
+  invoices: Invoice[];
+  totalCount: number;
+}
+
 export type JobAdStatus = 'draft' | 'published' | 'archived';
 
 export interface Invoice {
@@ -50,9 +55,12 @@ export interface InvoiceDto extends Invoice {
   _embedded: unknown;
 }
 
-export interface JobsListPageParams {
+export interface BaseListParams {
   page: number;
   pageSize: number;
+}
+
+export interface JobsListPageParams extends BaseListParams {
   query?: string;
   status?: JobAdStatus;
   sort?: string;

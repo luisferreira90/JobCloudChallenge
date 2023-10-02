@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { deleteJobAd, getJobsList, updateJobAdStatus } from './store/jobs-list.actions';
 import { Store } from '@ngrx/store';
 import { JobAd, JobsListPageParams } from '../../models/models';
-import { selectJobsListAction, selectJobsListPageViewModel } from './store/jobs-list.selector';
+import { selectJobsListAction, selectJobsListPageViewModel } from './store/jobs-list.selectors';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JobsListStateEvents } from './store/jobs-list.reducer';
 import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.service';
@@ -46,7 +46,7 @@ export class JobsListComponent implements OnInit {
   }
 
   deleteJobAd(id: number) {
-    this._jobsListStore.dispatch(deleteJobAd({ id, params: this.jobsListParams }));
+    this._jobsListStore.dispatch(deleteJobAd({ id }));
   }
 
   private _getJobsList(): void {

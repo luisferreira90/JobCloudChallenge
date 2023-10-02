@@ -22,7 +22,7 @@ export class JobComponent implements OnInit {
 
   jobAdForm = this._fb.group({
     title: ['', Validators.required],
-    description: [''],
+    description: ['', Validators.required, Validators.minLength(10)],
     skills: [],
     status: 'draft',
   });

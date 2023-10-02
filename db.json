@@ -1,17 +1,15 @@
 {
   "jobs": [
     {
-      "id": 12,
       "title": "Chemical Engineer",
       "description": "innovate impactful architectures",
       "skills": [
         "Plant Identification",
         "DFSS",
-        "Cultural Awareness",
-        "SketchUp",
-        "Oenology"
+        "Cultural Awareness"
       ],
-      "status": "published"
+      "status": "published",
+      "id": 12
     },
     {
       "id": 13,
@@ -1100,5 +1098,6 @@
       "status": "draft",
       "id": 103
     }
-  ]
+  ],
+  "invoices": []
 }

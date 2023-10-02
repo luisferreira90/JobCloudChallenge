@@ -20,7 +20,6 @@ export const deleteJobAd = createAction(
   '[Jobs List Page] Delete Job Ad',
   props<{
     id: number;
-    params: JobsListPageParams;
   }>(),
 );
 

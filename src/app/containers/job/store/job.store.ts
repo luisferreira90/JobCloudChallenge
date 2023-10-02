@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { JobAd } from '../../../models/models';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable, switchMap, tap } from 'rxjs';
-import { JobService } from './job.service';
 import { catchError } from 'rxjs/operators';
+import { ApiService } from '../../../shared/services/api/api.service';
 
 export enum JobStateActions {
   JOB_LOADED,
@@ -36,7 +36,7 @@ export class JobStore extends ComponentStore<JobState> {
   readonly getJobAd = this.effect((jobAdId$: Observable<number>) => {
     return jobAdId$.pipe(
       switchMap((id) =>
-        this._jobService.getJob(id).pipe(
+        this._apiService.getJob(id).pipe(
           tap({
             next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_LOADED }),
             error: (e) => this.logError(e),
@@ -51,7 +51,7 @@ export class JobStore extends ComponentStore<JobState> {
   readonly createJobAd = this.effect((newJobAd$: Observable<Partial<JobAd>>) => {
     return newJobAd$.pipe(
       switchMap((newJobAd) =>
-        this._jobService.createJob(newJobAd).pipe(
+        this._apiService.createJob(newJobAd).pipe(
           tap({
             next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_CREATED }),
             error: (e) => this.logError(e),
@@ -66,7 +66,7 @@ export class JobStore extends ComponentStore<JobState> {
   readonly updateJobAd = this.effect((updatedJobAd$: Observable<Partial<JobAd>>) => {
     return updatedJobAd$.pipe(
       switchMap((updatedJobAd) =>
-        this._jobService.updateJob(updatedJobAd).pipe(
+        this._apiService.updateJob(updatedJobAd).pipe(
           tap({
             next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_UPDATED }),
             error: (e) => this.logError(e),
@@ -78,7 +78,7 @@ export class JobStore extends ComponentStore<JobState> {
     );
   });
 
-  constructor(private readonly _jobService: JobService) {
+  constructor(private readonly _apiService: ApiService) {
     super({ jobAd: <JobAd>{}, action: JobStateActions.NO_ACTION });
   }
 

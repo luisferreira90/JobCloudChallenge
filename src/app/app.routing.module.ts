@@ -20,6 +20,11 @@ const projectRoutes: Routes = [
     path: 'job/:id',
     loadChildren: () => import('./containers/job/job.module').then((m) => m.JobModule),
   },
+  {
+    path: 'invoices-list',
+    loadChildren: () =>
+      import('./containers/invoices-list/invoices-list.module').then((m) => m.InvoicesListModule),
+  },
 ];
 
 @NgModule({
