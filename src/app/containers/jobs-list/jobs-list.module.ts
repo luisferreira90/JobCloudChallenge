@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { jobsListFeatureKey, jobsListReducer } from './store/jobs-list.reducer';
 import { JobsListFiltersComponent } from './components/jobs-list-filters/jobs-list-filters.component';
 import { JobsListTableComponent } from './components/jobs-list-table/jobs-list-table.component';
-import { JobsListPaginatorComponent } from './components/jobs-list-paginator/jobs-list-paginator.component';
+import { TablePaginatorComponent } from '../../shared/components/table-paginator/table-paginator.component';
 import { SnackBarModule } from '../../shared/services/snack-bar/snack-bar.module';
 import { LetDirective } from '@ngrx/component';
 
@@ -26,7 +26,7 @@ const routes: Routes = [
     RouterOutlet,
     JobsListFiltersComponent,
     JobsListTableComponent,
-    JobsListPaginatorComponent,
+    TablePaginatorComponent,
     SnackBarModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(JobsListEffects),

@@ -11,8 +11,8 @@
                        [jobsList]="vm.jobsList">
   </app-jobs-list-table>
 
-  <app-jobs-list-paginator (updateParams)="updateParams($event)"
-                           [jobsListParams]="jobsListParams"
-                           [totalCount]="vm.totalCount">
-  </app-jobs-list-paginator>
+  <app-table-paginator (updateParams)="updateParams($event)"
+                       [params]="jobsListParams"
+                       [totalCount]="vm.totalCount">
+  </app-table-paginator>
 </ng-container>

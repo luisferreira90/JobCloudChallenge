@@ -1,25 +1,25 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntilDestroy } from '@ngneat/until-destroy';
-import { JobsListPageParams } from '../../../../models/models';
+import { BaseListParams } from '../../../models/models';
 import { CommonModule } from '@angular/common';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-jobs-list-paginator',
-  templateUrl: './jobs-list-paginator.component.html',
-  styleUrls: ['./jobs-list-paginator.component.css'],
+  selector: 'app-table-paginator',
+  templateUrl: './table-paginator.component.html',
+  styleUrls: ['./table-paginator.component.css'],
   standalone: true,
   imports: [CommonModule, MatPaginatorModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class JobsListPaginatorComponent {
+export class TablePaginatorComponent {
   @Input()
-  jobsListParams: JobsListPageParams;
+  params: BaseListParams;
   @Input()
   totalCount: number;
   @Output()
-  updateParams = new EventEmitter<Partial<JobsListPageParams>>();
+  updateParams = new EventEmitter<Partial<BaseListParams>>();
 
   pageChange(paginationEvent: PageEvent): void {
     const newPageParams = {
