@@ -32,7 +32,7 @@ interface JobAdUpdaterParams {
 }
 
 @Injectable()
-export class JobStore extends ComponentStore<JobState> {
+export class JobAdStore extends ComponentStore<JobState> {
   readonly jobState$: Observable<JobState> = this.select((state) => state);
   readonly jobAd$: Observable<JobAd> = this.select((state) => state.jobAd);
   readonly updaterJobAd = this.updater((state, params: JobAdUpdaterParams) => ({

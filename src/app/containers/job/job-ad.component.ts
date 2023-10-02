@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobStateActions, JobStore } from './store/job.store';
+import { JobAdStore, JobStateActions } from './store/job-ad.store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JobAd } from '../../models/models';
@@ -10,13 +10,13 @@ import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.servi
   selector: 'app-job',
   templateUrl: './job-ad.component.html',
   styleUrls: ['./job-ad.component.css'],
-  providers: [JobStore],
+  providers: [JobAdStore],
 })
 export class JobAdComponent implements OnInit {
   jobAd$ = this._jobStore.jobAd$;
 
   constructor(
-    private readonly _jobStore: JobStore,
+    private readonly _jobStore: JobAdStore,
     private readonly _route: ActivatedRoute,
     private readonly _router: Router,
     private readonly _snackBarService: SnackBarService,
