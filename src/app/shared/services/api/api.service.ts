@@ -17,6 +17,15 @@ const API_URL = 'http://localhost:3000';
   providedIn: 'root',
 })
 export class ApiService {
+  filtersMap = new Map([
+    ['page', '_page'],
+    ['pageSize', '_limit'],
+    ['sort', '_sort'],
+    ['order', '_order'],
+    ['query', '_title_like'],
+    ['status', 'status'],
+  ]);
+
   constructor(private readonly _httpClient: HttpClient) {}
 
   getJobsList(params: JobsListPageParams): Observable<JobAdsListResponse> {
@@ -90,6 +99,10 @@ export class ApiService {
     );
   }
 
+  createInvoice(invoice: Invoice): Observable<object> {
+    return <Observable<object>>this._httpClient.post(`${API_URL}/invoices`, invoice);
+  }
+
   deleteInvoice(id: number): Observable<object> {
     return <Observable<object>>this._httpClient.delete(`${API_URL}/invoices/${id}`);
   }
@@ -101,7 +114,8 @@ export class ApiService {
     return this._httpClient.get(`${API_URL}/jobs?${urlSearchParams.toString()}`).pipe(
       map((response) => {
         // The map always assumes an object. I need to create an HTTP handler to make this more
-        // straightforward, and not have to cast, but I am running out of time so for now
+        // straightforward, take care of HTTP call responses,
+        // and not have to cast, but I am running out of time so for now
         // I will cast directly, and focus on the other important bits
         const castedResponse = <JobAd[]>(<unknown>response);
         return castedResponse.length > 0;
