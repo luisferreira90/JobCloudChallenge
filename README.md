@@ -36,16 +36,9 @@ The application should have the following features:
 
 - **List invoices:** The user should be able to list the invoices.
 
-- When a job ad is published, an invoice should be created.
-
 Here are some additional details :
 
 - When a job ad is deleted, all of its related data, such as the invoice, should also be deleted.
-
-- The due date of an invoice is calculated based on the date the job ad was published and the current month. For
-  example, if a job ad is published on February 15, 2023, the due date of the invoice will be April 30, 2023.
-
-- Amount of the invoice is up to you.
 
 ## Bonus features
 
@@ -55,19 +48,4 @@ Here are some additional details :
 
 To complete this challenge, you will need to:
 
-7. Create effects for triggering invoices.
 8. Test the application.
-
-## Interfaces
-
-The `Invoice` interface defines the properties of an invoice. The `jobAdId` property is the ID of the job ad that the
-invoice is for. The `amount` property is the amount of money due. The `dueDate` property is the date by which the
-invoice is due.
-
-The `JobAdDto` and `InvoiceDto` interfaces extend the `JobAd` and `Invoice` interfaces, respectively, and add properties
-that are not part of the model. These properties are used to store additional information about the job ad or invoice,
-such as the creation and update dates.
-
-## Evaluation criteria
-
-- The ability to trigger an invoice for each job ad publication.
