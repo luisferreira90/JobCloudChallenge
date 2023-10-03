@@ -8,9 +8,14 @@ import { LetDirective } from '@ngrx/component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { selectJobsList, selectJobsListTotalCount } from './store/jobs-list.selectors';
+import { ApiService } from '../../shared/services/api/api.service';
+import { of } from 'rxjs';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('JobsListComponent', () => {
   let spectator: Spectator<JobsListComponent>;
+  let apiService: ApiService;
+
   const createComponent = createComponentFactory({
     component: JobsListComponent,
     imports: [
@@ -19,6 +24,7 @@ describe('JobsListComponent', () => {
       JobsListTableComponent,
       TablePaginatorComponent,
       SnackBarModule,
+      HttpClientTestingModule,
       LetDirective,
     ],
     providers: [
@@ -26,22 +32,52 @@ describe('JobsListComponent', () => {
         selectors: [
           {
             selector: selectJobsList,
-            value: [],
+            value: [
+              {
+                id: 1,
+                title: 'Web Dev',
+                status: 'draft',
+              },
+            ],
           },
           {
             selector: selectJobsListTotalCount,
-            value: 0,
+            value: 1,
           },
         ],
       }),
     ],
   });
 
-  beforeEach(() => (spectator = createComponent()));
+  beforeEach(() => {
+    spectator = createComponent();
+    apiService = spectator.inject(ApiService);
+  });
 
-  it('should have a success class by default', () => {
+  it('should find an element of the list', () => {
     // GIVEN
+    jest.spyOn(apiService, 'getJobsList').mockReturnValue(
+      of({
+        jobAds: [
+          {
+            id: 1,
+            title: 'Web Dev',
+            description: 'Test description',
+            status: 'draft',
+            skills: ['JavaScript'],
+          },
+        ],
+        totalCount: 1,
+      }),
+    );
+
     // WHEN
+    spectator.component.ngOnInit();
+
     // THEN
+    spectator.component.vm$.subscribe((data) => {
+      console.log(data);
+      expect(data.totalCount).toEqual(0);
+    });
   });
 });

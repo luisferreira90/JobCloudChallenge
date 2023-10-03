@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JobAdStore, JobStateActions } from './store/job-ad.store';
+import { JobAdStore, JobStateEvents } from './store/job-ad.store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { JobAd } from '../../models/models';
@@ -38,10 +38,10 @@ export class JobAdComponent implements OnInit {
   private _listenToStoreActions(): void {
     this._jobStore.jobState$.pipe(untilDestroyed(this)).subscribe((state) => {
       switch (state.action) {
-        case JobStateActions.JOB_CREATED:
+        case JobStateEvents.JOB_CREATED:
           this._handleJobCreationSuccess(state.jobAd);
           break;
-        case JobStateActions.JOB_UPDATED:
+        case JobStateEvents.JOB_UPDATED:
           this._displayMessage('Job successfully updated');
           break;
       }

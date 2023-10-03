@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import * as InvoicesListActions from './invoices-list.actions';
-import { BaseListParams, Invoice } from '../../../models/models';
+import { BaseListParams, InvoiceDto } from '../../../models/models';
 
 export const invoicesListFeatureKey = 'invoicesList';
 
@@ -14,7 +14,7 @@ export enum InvoicesListStateEvents {
 }
 
 export interface InvoicesListState {
-  invoicesList: Invoice[];
+  invoicesList: InvoiceDto[];
   totalCount: number;
   invoicesListParams: BaseListParams;
   event: InvoicesListStateEvents;

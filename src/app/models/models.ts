@@ -28,7 +28,7 @@ export interface JobAdsListResponse {
 }
 
 export interface InvoiceListResponse {
-  invoices: Invoice[];
+  invoices: InvoiceDto[];
   totalCount: number;
 }
 
@@ -58,11 +58,11 @@ export interface InvoiceDto extends Invoice {
 export interface BaseListParams {
   page: number;
   pageSize: number;
+  sort?: string;
+  order?: 'asc' | 'desc';
 }
 
 export interface JobsListPageParams extends BaseListParams {
   query?: string;
   status?: JobAdStatus;
-  sort?: string;
-  order?: 'asc' | 'desc';
 }

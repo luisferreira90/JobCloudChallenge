@@ -1,0 +1,21 @@
+form {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+mat-form-field {
+  display: block;
+  margin: 20px 0;
+}
+
+.skills-errors {
+  mat-error {
+    position: relative;
+    top: -25px;
+    font-family: var(--mat-form-field-subscript-text-font);
+    line-height: var(--mat-form-field-subscript-text-line-height);
+    font-size: var(--mat-form-field-subscript-text-size);
+    letter-spacing: var(--mat-form-field-subscript-text-tracking);
+    font-weight: var(--mat-form-field-subscript-text-weight);
+  }
+}

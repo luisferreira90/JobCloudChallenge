@@ -1,0 +1,37 @@
+<table [dataSource]="invoicesList"
+       class="mat-elevation-z8"
+       mat-table>
+
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef mat-header-cell>ID</th>
+    <td *matCellDef="let element" mat-cell>
+      {{element.id}}
+    </td>
+  </ng-container>
+
+  <!-- Job Ad ID Column -->
+  <ng-container matColumnDef="jobAdId">
+    <th *matHeaderCellDef mat-header-cell>Job Ad ID</th>
+    <td *matCellDef="let element" mat-cell>
+      <a [routerLink]="['/job/' + element.jobAdId]">{{element.jobAdId}}</a>
+    </td>
+  </ng-container>
+
+  <!-- Amount Column -->
+  <ng-container matColumnDef="amount">
+    <th *matHeaderCellDef mat-header-cell>Amount</th>
+    <td *matCellDef="let element" mat-cell>
+      {{element.amount | currency:'CHF'}}
+    </td>
+  </ng-container>
+
+  <!-- Due Date Column -->
+  <ng-container matColumnDef="dueDate">
+    <th *matHeaderCellDef mat-header-cell>Due Date</th>
+    <td *matCellDef="let element" mat-cell> {{element.dueDate | date}} </td>
+  </ng-container>
+
+  <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+  <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>

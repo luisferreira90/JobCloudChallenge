@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ApiModule } from './shared/services/api/api.module';
+import { InvoicesListEffects } from './containers/invoices-list/store/invoices-list.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,7 @@ import { ApiModule } from './shared/services/api/api.module';
     HeaderComponent,
     ApiModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([InvoicesListEffects]),
   ],
   bootstrap: [AppComponent],
 })
