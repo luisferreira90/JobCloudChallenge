@@ -8,7 +8,7 @@
         "DFSS",
         "Cultural Awareness"
       ],
-      "status": "published",
+      "status": "archived",
       "id": 12
     },
     {
@@ -35,7 +35,7 @@
         "IOS-XR",
         "Vital Signs"
       ],
-      "status": "draft"
+      "status": "published"
     },
     {
       "title": "Editor",
@@ -74,7 +74,7 @@
         "Red Hat Linux",
         "SDI"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 21,
@@ -100,7 +100,7 @@
         "Kurdish",
         "Property &amp; Casualty Insurance"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 28,
@@ -113,7 +113,7 @@
         "Abstraction",
         "Aircraft Design"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 29,
@@ -139,7 +139,7 @@
         "DDR",
         "Project Oversight"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 31,
@@ -152,7 +152,7 @@
         "VCT",
         "Ambulatory"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 33,
@@ -165,7 +165,7 @@
         "Windows Azure",
         "ILOG"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 34,
@@ -178,7 +178,7 @@
         "RP",
         "ERD"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 35,
@@ -191,7 +191,7 @@
         "DNA Extraction",
         "Spanish"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 36,
@@ -204,7 +204,7 @@
         "TI DSPs",
         "Lithium-ion Batteries"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 37,
@@ -217,7 +217,7 @@
         "QML",
         "Sleep Apnea"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 38,
@@ -243,7 +243,7 @@
         "TCPA",
         "Equity Research"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 40,
@@ -256,7 +256,7 @@
         "WPA",
         "OLA"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 41,
@@ -269,7 +269,7 @@
         "PKCS#11",
         "JSP440"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 42,
@@ -295,7 +295,7 @@
         "BSP",
         "Blood Pressure"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 44,
@@ -321,7 +321,7 @@
         "Rail",
         "Economic Development"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 46,
@@ -334,7 +334,7 @@
         "Mythology",
         "Interest Rate Swaps"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 47,
@@ -347,7 +347,7 @@
         "LCD Projectors",
         "DNA Extraction"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 48,
@@ -386,7 +386,7 @@
         "RGB",
         "Public Speaking"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 51,
@@ -399,7 +399,7 @@
         "NPL",
         "Tunneling"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 52,
@@ -412,7 +412,7 @@
         "Diagnostic Ultrasound",
         "cPanel"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 53,
@@ -425,7 +425,7 @@
         "DHS",
         "OWL"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 54,
@@ -438,7 +438,7 @@
         "Xenu",
         "DNA quantification"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 55,
@@ -451,7 +451,7 @@
         "Video",
         "Financial Audits"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 56,
@@ -477,7 +477,7 @@
         "Behavioral Health",
         "HVAC Design"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 58,
@@ -490,7 +490,7 @@
         "MRI Plus",
         "DUI Defense"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 59,
@@ -503,7 +503,7 @@
         "Ethnography",
         "Hybrid Cloud"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 60,
@@ -516,7 +516,7 @@
         "Fertility",
         "Logistics Management"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 61,
@@ -529,7 +529,7 @@
         "ASME",
         "ebXML"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 62,
@@ -542,7 +542,7 @@
         "GSA Contracting",
         "Valves"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 63,
@@ -555,7 +555,7 @@
         "Fashion",
         "Industrial Ethernet"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 64,
@@ -568,7 +568,7 @@
         "OBIEE",
         "Crystal Xcelsius 2008"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 65,
@@ -581,7 +581,7 @@
         "SBT",
         "RSLinx"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 66,
@@ -607,7 +607,7 @@
         "Omnet++",
         "MyBatis"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 69,
@@ -633,7 +633,7 @@
         "Emotional Intelligence",
         "Gnome"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 71,
@@ -646,7 +646,7 @@
         "Diagnostic Ultrasound",
         "MP3"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 72,
@@ -672,7 +672,7 @@
         "RPOs",
         "Book Illustration"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 74,
@@ -685,7 +685,7 @@
         "EU Competition Law",
         "BJT"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 75,
@@ -698,7 +698,7 @@
         "TNCC",
         "Bartending"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 76,
@@ -711,7 +711,7 @@
         "Educational Leadership",
         "Eplan"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 77,
@@ -724,7 +724,7 @@
         "Feature Writing",
         "Home Staging"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 78,
@@ -737,7 +737,7 @@
         "Critical Thinking",
         "Object Oriented Design"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 79,
@@ -763,7 +763,7 @@
         "Outpatient Orthopedics",
         "Tubing"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 81,
@@ -776,7 +776,7 @@
         "Music Theory",
         "CMMS"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 82,
@@ -802,7 +802,7 @@
         "Agile &amp; Waterfall Methodologies",
         "PGP"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 84,
@@ -815,7 +815,7 @@
         "SNA",
         "NPI Management"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 85,
@@ -828,7 +828,7 @@
         "Application Architecture",
         "MBS"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 86,
@@ -841,7 +841,7 @@
         "GTS",
         "MRSA"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 87,
@@ -854,7 +854,7 @@
         "PDA",
         "Physician Relations"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 88,
@@ -867,7 +867,7 @@
         "RGB",
         "JWICS"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 89,
@@ -880,7 +880,7 @@
         "Mac OS X Server",
         "On-Set VFX Supervision"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 90,
@@ -893,7 +893,7 @@
         "Music Production",
         "Highways"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 91,
@@ -919,7 +919,7 @@
         "CST Microwave Studio",
         "Flash"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 93,
@@ -932,7 +932,7 @@
         "Public Health",
         "Yoga Instruction"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 94,
@@ -958,7 +958,7 @@
         "Sqoop",
         "EPCM"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 96,
@@ -971,7 +971,7 @@
         "LCM",
         "CSG"
       ],
-      "status": "archived"
+      "status": "draft"
     },
     {
       "id": 97,
@@ -984,7 +984,7 @@
         "GMC",
         "Curriculum Development"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 98,
@@ -1023,7 +1023,7 @@
         "Game Design",
         "VLDB"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "title": "Let's go",
@@ -1036,7 +1036,7 @@
       "title": "Let's test this code",
       "description": "",
       "skills": null,
-      "status": "published",
+      "status": "draft",
       "id": 102
     },
     {
@@ -1049,7 +1049,7 @@
         "Sanction II",
         "Kontakt"
       ],
-      "status": "published",
+      "status": "draft",
       "id": 104
     },
     {
@@ -1062,7 +1062,7 @@
         "Sanction II",
         "Kontakt"
       ],
-      "status": "published",
+      "status": "draft",
       "id": 105
     },
     {
@@ -1075,7 +1075,7 @@
         "para",
         "testar"
       ],
-      "status": "published"
+      "status": "draft"
     },
     {
       "id": 107,
@@ -1090,5 +1090,22 @@
       "status": "draft"
     }
   ],
-  "invoices": []
+  "invoices": [
+    {
+      "jobAdId": 14,
+      "amount": 0.553097562479907,
+      "updatedAt": "2023-10-03T10:46:00.914Z",
+      "createdAt": "2023-10-03T10:46:00.914Z",
+      "dueDate": "2023-10-03T10:46:00.914Z",
+      "id": 1
+    },
+    {
+      "jobAdId": 15,
+      "amount": 0.6332909459406355,
+      "updatedAt": "2023-10-03T10:48:04.772Z",
+      "createdAt": "2023-10-03T10:48:04.772Z",
+      "dueDate": "2023-10-03T10:48:04.772Z",
+      "id": 2
+    }
+  ]
 }

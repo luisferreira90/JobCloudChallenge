@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { BaseListParams, InvoiceListResponse } from '../../../models/models';
+import { BaseListParams, InvoiceDto, InvoiceListResponse } from '../../../models/models';
 
 export const getInvoicesList = createAction(
   '[Invoices List Page] Get Invoices List',
@@ -13,6 +13,21 @@ export const getInvoicesListSuccess = createAction(
 
 export const getInvoicesListError = createAction(
   '[Invoices List Page] Get Invoices List Error',
+  props<{ errorMessage: string }>(),
+);
+
+export const createInvoice = createAction(
+  '[Invoices List Page] Create Invoice',
+  props<{ invoice: InvoiceDto }>(),
+);
+
+export const createInvoiceSuccess = createAction(
+  '[Invoices List Page] Create Invoice Success',
+  props<{ invoice: InvoiceDto }>(),
+);
+
+export const createInvoiceError = createAction(
+  '[Invoices List Page] Create Invoice Error',
   props<{ errorMessage: string }>(),
 );
 

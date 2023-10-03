@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, map } from 'rxjs/operators';
 import {
+  createInvoice,
+  createInvoiceError,
+  createInvoiceSuccess,
   deleteInvoice,
   deleteInvoiceError,
   deleteInvoiceSuccess,
@@ -25,6 +28,19 @@ export class InvoicesListEffects {
           catchError((error) => of(getInvoicesListError({ errorMessage: error }))),
         ),
       ),
+    ),
+  );
+
+  createInvoice$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(createInvoice),
+      exhaustMap((action) => {
+        console.log(action);
+        return this._apiService.createInvoice(action.invoice).pipe(
+          map((invoice) => createInvoiceSuccess({ invoice })),
+          catchError((error) => of(createInvoiceError({ errorMessage: error }))),
+        );
+      }),
     ),
   );
 

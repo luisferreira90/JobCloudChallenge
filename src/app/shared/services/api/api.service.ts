@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {
   BaseListParams,
   Invoice,
+  InvoiceDto,
   InvoiceListResponse,
   JobAd,
   JobAdsListResponse,
@@ -83,8 +84,8 @@ export class ApiService {
     );
   }
 
-  createInvoice(invoice: Invoice): Observable<object> {
-    return <Observable<object>>this._httpClient.post(`${API_URL}/invoices`, invoice);
+  createInvoice(invoice: InvoiceDto): Observable<InvoiceDto> {
+    return <Observable<InvoiceDto>>this._httpClient.post(`${API_URL}/invoices`, invoice);
   }
 
   deleteInvoice(id: number): Observable<object> {
