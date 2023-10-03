@@ -1,6 +1,8 @@
 <ng-container *ngrxLet="vm$ as vm">
   <h1>Invoices List</h1>
 
+  <app-invoices-list-table [invoicesList]="vm.invoicesList"></app-invoices-list-table>
+
   <app-table-paginator (updateParams)="updateParams($event)"
                        [params]="invoicesListParams"
                        [totalCount]="vm.totalCount">

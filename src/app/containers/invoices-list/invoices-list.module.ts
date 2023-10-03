@@ -7,6 +7,7 @@ import { invoicesListFeatureKey, invoicesListReducer } from './store/invoices-li
 import { LetDirective } from '@ngrx/component';
 import { SnackBarModule } from '../../shared/services/snack-bar/snack-bar.module';
 import { TablePaginatorComponent } from '../../shared/components/table-paginator/table-paginator.component';
+import { InvoicesListTableComponent } from './components/invoices-list-table/invoices-list-table.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     TablePaginatorComponent,
     RouterModule.forChild(routes),
     StoreModule.forFeature(invoicesListFeatureKey, invoicesListReducer),
+    InvoicesListTableComponent,
   ],
 })
 export class InvoicesListModule {}
