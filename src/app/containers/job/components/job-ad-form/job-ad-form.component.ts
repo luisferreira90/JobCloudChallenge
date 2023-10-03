@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SnackBarService } from '../../../../shared/services/snack-bar/snack-bar.service';
 import { ApiService } from '../../../../shared/services/api/api.service';
-import { JobAd } from '../../../../models/models';
+import { JobAdDto } from '../../../../models/models';
 import { JobAdTitleValidator } from '../../validators/same-name.validator';
 import { CommonModule } from '@angular/common';
 
@@ -32,7 +32,7 @@ import { CommonModule } from '@angular/common';
 })
 export class JobAdFormComponent {
   @Output()
-  createUpdateJobAd = new EventEmitter<JobAd>();
+  createUpdateJobAd = new EventEmitter<JobAdDto>();
 
   jobAdForm: FormGroup;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
@@ -43,13 +43,13 @@ export class JobAdFormComponent {
     private readonly _apiService: ApiService,
   ) {}
 
-  private _jobAd: JobAd;
+  private _jobAd: JobAdDto;
 
-  get jobAd(): JobAd {
+  get jobAd(): JobAdDto {
     return this._jobAd;
   }
 
-  @Input() set jobAd(jobAd: JobAd) {
+  @Input() set jobAd(jobAd: JobAdDto) {
     this._jobAd = jobAd;
     this._setupForm(jobAd);
   }
@@ -80,10 +80,15 @@ export class JobAdFormComponent {
   }
 
   onSubmit() {
+    const currentDate = new Date();
+    if (!this.jobAd.createdAt) {
+      this.jobAdForm.controls['createdAt'].patchValue(currentDate);
+    }
+    this.jobAdForm.controls['updatedAt'].patchValue(currentDate);
     this.createUpdateJobAd.emit(this.jobAdForm.getRawValue());
   }
 
-  private _setupForm(jobAd: JobAd): void {
+  private _setupForm(jobAd: JobAdDto): void {
     this.jobAdForm = this._fb.group({
       id: [jobAd.id],
       title: [
@@ -94,6 +99,8 @@ export class JobAdFormComponent {
       description: [jobAd.description, Validators.required],
       skills: [[...jobAd.skills], Validators.required],
       status: jobAd.status,
+      updatedAt: [jobAd.updatedAt],
+      createdAt: [jobAd.createdAt],
     });
 
     if (jobAd.status === 'archived') {

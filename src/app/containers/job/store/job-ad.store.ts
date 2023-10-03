@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
-import { JobAd } from '../../../models/models';
+import { JobAdDto } from '../../../models/models';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable, of, switchMap, tap } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ApiService } from '../../../shared/services/api/api.service';
 
-export const DEFAULT_JOB_AD = <JobAd>{
+export const DEFAULT_JOB_AD = <JobAdDto>{
   id: null,
   title: '',
   description: '',
   status: 'draft',
   skills: [],
+  createdAt: null,
+  updatedAt: null,
+  _embedded: '',
 };
 
 export enum JobStateActions {
@@ -22,19 +25,19 @@ export enum JobStateActions {
 }
 
 export interface JobState {
-  jobAd: JobAd;
+  jobAd: JobAdDto;
   action: JobStateActions;
 }
 
 interface JobAdUpdaterParams {
-  jobAd: JobAd;
+  jobAd: JobAdDto;
   action: JobStateActions;
 }
 
 @Injectable()
 export class JobAdStore extends ComponentStore<JobState> {
   readonly jobState$: Observable<JobState> = this.select((state) => state);
-  readonly jobAd$: Observable<JobAd> = this.select((state) => state.jobAd);
+  readonly jobAd$: Observable<JobAdDto> = this.select((state) => state.jobAd);
   readonly updaterJobAd = this.updater((state, params: JobAdUpdaterParams) => ({
     ...state,
     jobAd: params.jobAd,
@@ -62,7 +65,7 @@ export class JobAdStore extends ComponentStore<JobState> {
     );
   });
 
-  readonly createUpdateJobAd = this.effect((newJobAd$: Observable<Partial<JobAd>>) => {
+  readonly createUpdateJobAd = this.effect((newJobAd$: Observable<Partial<JobAdDto>>) => {
     return newJobAd$.pipe(
       switchMap((jobAd) => {
         if (jobAd.id) {

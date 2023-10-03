@@ -6,6 +6,7 @@ import {
   InvoiceDto,
   InvoiceListResponse,
   JobAd,
+  JobAdDto,
   JobAdsListResponse,
   JobsListPageParams,
 } from '../../../models/models';
@@ -49,16 +50,18 @@ export class ApiService {
     );
   }
 
-  getJob(id: number): Observable<JobAd> {
-    return <Observable<JobAd>>this._httpClient.get(`${API_URL}/jobs/${id}`);
+  getJob(id: number): Observable<JobAdDto> {
+    return <Observable<JobAdDto>>this._httpClient.get(`${API_URL}/jobs/${id}`);
   }
 
-  createJob(params: Partial<JobAd>): Observable<JobAd> {
-    return <Observable<JobAd>>this._httpClient.post(`${API_URL}/jobs`, { ...params });
+  createJob(params: Partial<JobAdDto>): Observable<JobAdDto> {
+    return <Observable<JobAdDto>>this._httpClient.post(`${API_URL}/jobs`, { ...params });
   }
 
-  updateJob(params: Partial<JobAd>): Observable<JobAd> {
-    return <Observable<JobAd>>this._httpClient.put(`${API_URL}/jobs/${params.id}`, { ...params });
+  updateJob(params: Partial<JobAdDto>): Observable<JobAdDto> {
+    return <Observable<JobAdDto>>(
+      this._httpClient.put(`${API_URL}/jobs/${params.id}`, { ...params })
+    );
   }
 
   deleteJobAd(id: number): Observable<object> {
