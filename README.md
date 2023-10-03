@@ -32,12 +32,6 @@ the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
 
 ## Challenge
 
-The application should have the following features:
-
-- **List invoices:** The user should be able to list the invoices.
-
-Here are some additional details :
-
 - When a job ad is deleted, all of its related data, such as the invoice, should also be deleted.
 
 ## Bonus features
