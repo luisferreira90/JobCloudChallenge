@@ -29,7 +29,14 @@ export class ApiService {
   constructor(private readonly _httpClient: HttpClient) {}
 
   getJobsList(params: JobsListPageParams): Observable<JobAdsListResponse> {
-    const urlSearchParams = this._returnQueryParams(params);
+    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
+    // This is a little hack that should not be present in production
+    const paramsCopy = {
+      ...params,
+      page: params.page + 1,
+    };
+
+    const urlSearchParams = this._returnQueryParams(paramsCopy);
 
     return <Observable<JobAdsListResponse>>(
       this._httpClient
@@ -108,18 +115,12 @@ export class ApiService {
     );
   }
 
-  private _returnQueryParams(params: JobsListPageParams): URLSearchParams {
+  private _returnQueryParams<T>(params: T): URLSearchParams {
     const urlSearchParams = new URLSearchParams();
 
-    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
-    const paramsCopy = {
-      ...params,
-      page: params.page + 1,
-    };
-
-    const paramsKeys = Object.keys(paramsCopy);
+    const paramsKeys = Object.keys(params);
     paramsKeys.forEach((key: string) => {
-      const value = paramsCopy[key as keyof JobsListPageParams];
+      const value = params[key as keyof T];
       if (value) {
         urlSearchParams.set(this.filtersMap.get(key), value.toString());
       }
