@@ -4,10 +4,7 @@ import { map } from 'rxjs/operators';
 import { ApiService } from '../../../shared/services/api/api.service';
 
 export class JobAdTitleValidator {
-  static checkIfNameAlreadyExistsValidator(
-    apiService: ApiService,
-    currentTitle: string,
-  ): AsyncValidatorFn {
+  static jobAdTitleValidator(apiService: ApiService, currentTitle: string): AsyncValidatorFn {
     return (control: AbstractControl): Observable<ValidationErrors> => {
       if (currentTitle === control.value) {
         return of(null);

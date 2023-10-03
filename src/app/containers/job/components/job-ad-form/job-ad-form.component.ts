@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { SnackBarService } from '../../../../shared/services/snack-bar/snack-bar.service';
 import { ApiService } from '../../../../shared/services/api/api.service';
 import { JobAdDto } from '../../../../models/models';
-import { JobAdTitleValidator } from '../../validators/same-name.validator';
+import { JobAdTitleValidator } from '../../validators/job-ad-title.validator';
 import { CommonModule } from '@angular/common';
 
 @UntilDestroy()
@@ -94,7 +94,7 @@ export class JobAdFormComponent {
       title: [
         jobAd.title,
         Validators.required,
-        [JobAdTitleValidator.checkIfNameAlreadyExistsValidator(this._apiService, jobAd.title)],
+        [JobAdTitleValidator.jobAdTitleValidator(this._apiService, jobAd.title)],
       ],
       description: [jobAd.description, Validators.required],
       skills: [[...jobAd.skills], Validators.required],
