@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { InvoicesListComponent } from './invoices-list.component';
 import { RouterModule, RouterOutlet, Routes } from '@angular/router';
-import { EffectsModule } from '@ngrx/effects';
-import { InvoicesListEffects } from './store/invoices-list.effects';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { invoicesListFeatureKey, invoicesListReducer } from './store/invoices-list.reducer';
 import { LetDirective } from '@ngrx/component';
 import { SnackBarModule } from '../../shared/services/snack-bar/snack-bar.module';
 import { TablePaginatorComponent } from '../../shared/components/table-paginator/table-paginator.component';
+import { InvoicesListTableComponent } from './components/invoices-list-table/invoices-list-table.component';
+import { MatButtonModule } from '@angular/material/button';
+import { NoResultsComponent } from '../../shared/components/no-results/no-results.component';
 
 const routes: Routes = [
   {
@@ -24,10 +25,12 @@ const routes: Routes = [
     RouterOutlet,
     LetDirective,
     SnackBarModule,
-    RouterModule.forChild(routes),
-    EffectsModule.forFeature(InvoicesListEffects),
-    StoreModule.forFeature(invoicesListFeatureKey, invoicesListReducer),
     TablePaginatorComponent,
+    RouterModule.forChild(routes),
+    StoreModule.forFeature(invoicesListFeatureKey, invoicesListReducer),
+    InvoicesListTableComponent,
+    MatButtonModule,
+    NoResultsComponent,
   ],
 })
 export class InvoicesListModule {}

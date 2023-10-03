@@ -1,0 +1,12 @@
+.no-results {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    padding: 30px 5px;
+    margin: 0 auto;
+    border: solid 1px #2d2d2d;
+    border-radius: 4px;
+    color: #FFF;
+}

@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, exhaustMap, filter, map } from 'rxjs/operators';
 import {
-  deleteInvoice,
-  deleteInvoiceError,
+  createInvoice,
+  createInvoiceError,
+  createInvoiceSuccess,
   deleteInvoiceSuccess,
+  getInvoiceByJobAdIdSuccess,
   getInvoicesList,
   getInvoicesListError,
   getInvoicesListSuccess,
@@ -13,6 +15,8 @@ import { of } from 'rxjs';
 import { InvoicesListState } from './invoices-list.reducer';
 import { Store } from '@ngrx/store';
 import { ApiService } from '../../../shared/services/api/api.service';
+import { buildInvoice } from './invoices-list.helper';
+import { deleteJobAdSuccess } from '../../jobs-list/store/jobs-list.actions';
 
 @Injectable()
 export class InvoicesListEffects {
@@ -28,14 +32,35 @@ export class InvoicesListEffects {
     ),
   );
 
-  deleteinvoice$ = createEffect(() =>
+  createInvoice$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(deleteInvoice),
+      ofType(createInvoice),
+      exhaustMap((action) => {
+        return this._apiService.createInvoice(buildInvoice(action.jobAd)).pipe(
+          map((invoice) => createInvoiceSuccess({ invoice })),
+          catchError((error) => of(createInvoiceError({ errorMessage: error }))),
+        );
+      }),
+    ),
+  );
+
+  getInvoiceByJobAdId$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(deleteJobAdSuccess),
+      filter((action) => action.jobAd.status !== 'draft'),
       exhaustMap((action) =>
-        this._apiService.deleteInvoice(action.id).pipe(
-          map(() => deleteInvoiceSuccess()),
-          catchError((error) => of(deleteInvoiceError({ errorMessage: error }))),
-        ),
+        this._apiService
+          .getInvoiceByJobAdId(action.jobAd.id)
+          .pipe(map((invoice) => getInvoiceByJobAdIdSuccess({ invoice: invoice[0] }))),
+      ),
+    ),
+  );
+
+  deleteInvoice$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(getInvoiceByJobAdIdSuccess),
+      exhaustMap((action) =>
+        this._apiService.deleteInvoice(action.invoice.id).pipe(map(() => deleteInvoiceSuccess())),
       ),
     ),
   );

@@ -11,6 +11,8 @@ import { JobsListTableComponent } from './components/jobs-list-table/jobs-list-t
 import { TablePaginatorComponent } from '../../shared/components/table-paginator/table-paginator.component';
 import { SnackBarModule } from '../../shared/services/snack-bar/snack-bar.module';
 import { LetDirective } from '@ngrx/component';
+import { NoResultsComponent } from '../../shared/components/no-results/no-results.component';
+import { MatButtonModule } from '@angular/material/button';
 
 const routes: Routes = [
   {
@@ -32,6 +34,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     EffectsModule.forFeature(JobsListEffects),
     StoreModule.forFeature(jobsListFeatureKey, jobsListReducer),
+    NoResultsComponent,
+    MatButtonModule,
   ],
 })
 export class JobsListModule {}

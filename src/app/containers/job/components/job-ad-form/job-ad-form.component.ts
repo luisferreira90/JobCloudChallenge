@@ -9,15 +9,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { SnackBarService } from '../../../../shared/services/snack-bar/snack-bar.service';
 import { ApiService } from '../../../../shared/services/api/api.service';
-import { JobAd } from '../../../../models/models';
-import { JobAdTitleValidator } from '../../validators/same-name.validator';
+import { JobAdDto } from '../../../../models/models';
+import { JobAdTitleValidator } from '../../validators/job-ad-title.validator';
 import { CommonModule } from '@angular/common';
 
 @UntilDestroy()
 @Component({
   selector: 'app-job-ad-form',
   templateUrl: './job-ad-form.component.html',
-  styleUrls: ['./job-ad-form.component.css'],
+  styleUrls: ['./job-ad-form.component.scss'],
   imports: [
     MatInputModule,
     MatSelectModule,
@@ -32,10 +32,10 @@ import { CommonModule } from '@angular/common';
 })
 export class JobAdFormComponent {
   @Output()
-  createUpdateJobAd = new EventEmitter<JobAd>();
+  createUpdateJobAd = new EventEmitter<JobAdDto>();
 
-  jobAdForm: FormGroup;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  jobAdForm: FormGroup;
 
   constructor(
     private readonly _fb: FormBuilder,
@@ -43,13 +43,13 @@ export class JobAdFormComponent {
     private readonly _apiService: ApiService,
   ) {}
 
-  private _jobAd: JobAd;
+  private _jobAd: JobAdDto;
 
-  get jobAd(): JobAd {
+  get jobAd(): JobAdDto {
     return this._jobAd;
   }
 
-  @Input() set jobAd(jobAd: JobAd) {
+  @Input() set jobAd(jobAd: JobAdDto) {
     this._jobAd = jobAd;
     this._setupForm(jobAd);
   }
@@ -80,20 +80,27 @@ export class JobAdFormComponent {
   }
 
   onSubmit() {
+    const currentDate = new Date();
+    if (!this.jobAd.createdAt) {
+      this.jobAdForm.controls['createdAt'].patchValue(currentDate);
+    }
+    this.jobAdForm.controls['updatedAt'].patchValue(currentDate);
     this.createUpdateJobAd.emit(this.jobAdForm.getRawValue());
   }
 
-  private _setupForm(jobAd: JobAd): void {
+  private _setupForm(jobAd: JobAdDto): void {
     this.jobAdForm = this._fb.group({
       id: [jobAd.id],
       title: [
         jobAd.title,
         Validators.required,
-        [JobAdTitleValidator.createValidator(this._apiService)],
+        [JobAdTitleValidator.jobAdTitleValidator(this._apiService, jobAd.title)],
       ],
       description: [jobAd.description, Validators.required],
       skills: [[...jobAd.skills], Validators.required],
       status: jobAd.status,
+      updatedAt: [jobAd.updatedAt],
+      createdAt: [jobAd.createdAt],
     });
 
     if (jobAd.status === 'archived') {

@@ -10,8 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 
 const DEFAULT_SORT: Partial<JobsListPageParams> = {
-  sort: undefined,
-  order: undefined,
+  sort: null,
+  order: null,
   page: 0,
 };
 
@@ -40,11 +40,11 @@ export class JobsListTableComponent {
   @Output()
   updateParams = new EventEmitter<Partial<JobsListPageParams>>();
   @Output()
-  deleteJobAd = new EventEmitter<number>();
+  deleteJobAd = new EventEmitter<JobAd>();
   @Output()
   changeJobAdStatus = new EventEmitter<JobAd>();
 
-  displayedColumns: string[] = ['id', 'title', 'status', 'options'];
+  displayedColumns: string[] = ['id', 'title', 'status', 'createdAt', 'options'];
 
   sortChange(sortEvent: Sort): void {
     const newSort: Partial<JobsListPageParams> = sortEvent.direction

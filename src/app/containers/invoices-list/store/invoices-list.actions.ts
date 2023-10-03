@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { BaseListParams, InvoiceListResponse } from '../../../models/models';
+import { BaseListParams, InvoiceDto, InvoiceListResponse, JobAd } from '../../../models/models';
 
 export const getInvoicesList = createAction(
   '[Invoices List Page] Get Invoices List',
@@ -16,12 +16,39 @@ export const getInvoicesListError = createAction(
   props<{ errorMessage: string }>(),
 );
 
+export const createInvoice = createAction(
+  '[Invoices List Page] Create Invoice',
+  props<{ jobAd: JobAd }>(),
+);
+
+export const createInvoiceSuccess = createAction(
+  '[Invoices List Page] Create Invoice Success',
+  props<{ invoice: InvoiceDto }>(),
+);
+
+export const createInvoiceError = createAction(
+  '[Invoices List Page] Create Invoice Error',
+  props<{ errorMessage: string }>(),
+);
+
+export const getInvoiceByJobAdId = createAction(
+  '[Invoices List Page] Get Invoice By Job Ad Id',
+  props<{ jobAdId: number }>(),
+);
+
+export const getInvoiceByJobAdIdSuccess = createAction(
+  '[Invoices List Page] Get Invoice By Job Ad Id Success',
+  props<{ invoice: InvoiceDto }>(),
+);
+
+export const getInvoiceByJobAdIdError = createAction(
+  '[Invoices List Page] Get Invoice By Job Ad Id Error',
+  props<{ errorMessage: string }>(),
+);
+
 export const deleteInvoice = createAction(
   '[Invoices List Page] Delete Invoice',
-  props<{
-    id: number;
-    params: BaseListParams;
-  }>(),
+  props<{ jobAdId: number }>(),
 );
 
 export const deleteInvoiceSuccess = createAction('[Invoices List Page] Delete Invoice Success');

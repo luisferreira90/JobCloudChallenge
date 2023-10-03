@@ -22,8 +22,10 @@ export const selectJobsListParams = createSelector(
 export const selectJobsListPageViewModel = createSelector(
   selectJobsList,
   selectJobsListTotalCount,
-  (jobsList, totalCount) => ({
+  selectJobsListAction,
+  (jobsList, totalCount, action) => ({
     jobsList,
     totalCount,
+    action,
   }),
 );
