@@ -12,6 +12,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const API_URL = 'http://localhost:3000';
+
+// Maps params in our models to the values expected on JSON-SERVER
 const FILTERS_MAP = new Map([
   ['page', '_page'],
   ['pageSize', '_limit'],
