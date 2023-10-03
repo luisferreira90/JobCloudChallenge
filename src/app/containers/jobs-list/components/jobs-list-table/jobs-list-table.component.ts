@@ -10,8 +10,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 
 const DEFAULT_SORT: Partial<JobsListPageParams> = {
-  sort: undefined,
-  order: undefined,
+  sort: null,
+  order: null,
   page: 0,
 };
 

@@ -22,29 +22,14 @@ export class ApiService {
     ['pageSize', '_limit'],
     ['sort', '_sort'],
     ['order', '_order'],
-    ['query', '_title_like'],
+    ['query', 'title_like'],
     ['status', 'status'],
   ]);
 
   constructor(private readonly _httpClient: HttpClient) {}
 
   getJobsList(params: JobsListPageParams): Observable<JobAdsListResponse> {
-    const urlSearchParams = new URLSearchParams();
-
-    // TODO: Add this into a map to not have to handle each parameter
-    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
-    urlSearchParams.set('_page', (params.page + 1).toString());
-    urlSearchParams.set('_limit', params.pageSize.toString());
-    if (params.sort && params.order) {
-      urlSearchParams.set('_sort', params.sort);
-      urlSearchParams.set('_order', params.order);
-    }
-    if (params.query) {
-      urlSearchParams.set('title_like', params.query);
-    }
-    if (params.status) {
-      urlSearchParams.set('status', params.status);
-    }
+    const urlSearchParams = this._returnQueryParams(params);
 
     return <Observable<JobAdsListResponse>>(
       this._httpClient
@@ -121,5 +106,25 @@ export class ApiService {
         return castedResponse.length > 0;
       }),
     );
+  }
+
+  private _returnQueryParams(params: JobsListPageParams): URLSearchParams {
+    const urlSearchParams = new URLSearchParams();
+
+    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
+    const paramsCopy = {
+      ...params,
+      page: params.page + 1,
+    };
+
+    const paramsKeys = Object.keys(paramsCopy);
+    paramsKeys.forEach((key: string) => {
+      const value = paramsCopy[key as keyof JobsListPageParams];
+      if (value) {
+        urlSearchParams.set(this.filtersMap.get(key), value.toString());
+      }
+    });
+
+    return urlSearchParams;
   }
 }
