@@ -26,6 +26,12 @@
     <td *matCellDef="let element" mat-cell> {{element.status}} </td>
   </ng-container>
 
+  <!-- Created at Column -->
+  <ng-container matColumnDef="createdAt">
+    <th *matHeaderCellDef mat-header-cell mat-sort-header>Created</th>
+    <td *matCellDef="let element" mat-cell> {{element.createdAt | date}} </td>
+  </ng-container>
+
   <!-- Options Column -->
   <ng-container matColumnDef="options">
     <th *matHeaderCellDef mat-header-cell></th>

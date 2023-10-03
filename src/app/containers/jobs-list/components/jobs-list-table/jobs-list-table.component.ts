@@ -44,7 +44,7 @@ export class JobsListTableComponent {
   @Output()
   changeJobAdStatus = new EventEmitter<JobAd>();
 
-  displayedColumns: string[] = ['id', 'title', 'status', 'options'];
+  displayedColumns: string[] = ['id', 'title', 'status', 'createdAt', 'options'];
 
   sortChange(sortEvent: Sort): void {
     const newSort: Partial<JobsListPageParams> = sortEvent.direction
