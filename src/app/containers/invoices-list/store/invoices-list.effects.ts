@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, exhaustMap, filter, map } from 'rxjs/operators';
 import {
   createInvoice,
   createInvoiceError,
@@ -47,6 +47,7 @@ export class InvoicesListEffects {
   getInvoiceByJobAdId$ = createEffect(() =>
     this._actions$.pipe(
       ofType(deleteJobAdSuccess),
+      filter((action) => action.jobAd.status !== 'draft'),
       exhaustMap((action) =>
         this._apiService
           .getInvoiceByJobAdId(action.jobAd.id)
