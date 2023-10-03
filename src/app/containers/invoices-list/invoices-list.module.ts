@@ -8,6 +8,8 @@ import { LetDirective } from '@ngrx/component';
 import { SnackBarModule } from '../../shared/services/snack-bar/snack-bar.module';
 import { TablePaginatorComponent } from '../../shared/components/table-paginator/table-paginator.component';
 import { InvoicesListTableComponent } from './components/invoices-list-table/invoices-list-table.component';
+import { MatButtonModule } from '@angular/material/button';
+import { NoResultsComponent } from '../../shared/components/no-results/no-results.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forFeature(invoicesListFeatureKey, invoicesListReducer),
     InvoicesListTableComponent,
+    MatButtonModule,
+    NoResultsComponent,
   ],
 })
 export class InvoicesListModule {}

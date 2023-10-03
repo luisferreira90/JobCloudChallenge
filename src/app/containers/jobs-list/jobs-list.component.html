@@ -5,14 +5,25 @@
                          [jobsListParams]="jobsListParams">
   </app-jobs-list-filters>
 
-  <app-jobs-list-table (changeJobAdStatus)="changeJobAdStatus($event)"
-                       (deleteJobAd)="deleteJobAd($event)"
-                       (updateParams)="updateParams($event)"
-                       [jobsList]="vm.jobsList">
-  </app-jobs-list-table>
+  <ng-container *ngIf="vm.jobsList.length > 0; else noResults">
+    <app-jobs-list-table (changeJobAdStatus)="changeJobAdStatus($event)"
+                         (deleteJobAd)="deleteJobAd($event)"
+                         (updateParams)="updateParams($event)"
+                         [jobsList]="vm.jobsList">
+    </app-jobs-list-table>
 
-  <app-table-paginator (updateParams)="updateParams($event)"
-                       [params]="jobsListParams"
-                       [totalCount]="vm.totalCount">
-  </app-table-paginator>
+    <app-table-paginator (updateParams)="updateParams($event)"
+                         [params]="jobsListParams"
+                         [totalCount]="vm.totalCount">
+    </app-table-paginator>
+  </ng-container>
+
+  <ng-template #noResults>
+    <app-no-results
+      [noResultsText]="'There are no Job Ads to display.'">
+      <a [routerLink]="'/job'">
+        <button color="primary" mat-raised-button>Create a new Job Ad</button>
+      </a>
+    </app-no-results>
+  </ng-template>
 </ng-container>
