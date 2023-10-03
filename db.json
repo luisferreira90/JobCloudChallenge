@@ -2,13 +2,13 @@
   "jobs": [
     {
       "id": 1,
-      "title": "Novo titulo",
-      "description": "2023-10-03T16:28:44.567Z",
+      "title": "Novo titulogg",
+      "description": "asgASGasggg",
       "skills": [
         "asg"
       ],
-      "status": "draft",
-      "updatedAt": "2023-10-03T16:29:14.737Z",
+      "status": "published",
+      "updatedAt": "2023-10-03T16:38:16.856Z",
       "createdAt": "2023-10-03T16:28:44.567Z"
     }
   ],

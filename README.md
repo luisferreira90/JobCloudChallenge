@@ -15,10 +15,8 @@ Run `ng test` to execute the unit tests.
 
 ## Bonus features
 
+- Create invoice when creating the job ad (not just from the list);
 - The ability to receive notifications when a job ad is created, edited, or deleted.
-
-## Instructions
-
-To complete this challenge, you will need to:
-
-8. Test the application.
+- Unit tests;
+- Debounce on searching for existing name in job creation form
+- Do not search if the name is the same as the current name

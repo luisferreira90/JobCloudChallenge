@@ -25,9 +25,9 @@
     <mat-form-field>
       <mat-label>Status</mat-label>
       <mat-select formControlName="status">
-        <mat-option *ngIf="jobAd.status !== 'published' && jobAd.status !== 'archived'" value="draft">Draft</mat-option>
-        <mat-option *ngIf="jobAd.status === 'draft'" value="published">Published</mat-option>
-        <mat-option *ngIf="jobAd.status != 'draft'" value="archived">Archived</mat-option>
+        <mat-option [disabled]="jobAd.status !== 'draft'" value="draft">Draft</mat-option>
+        <mat-option [disabled]="jobAd.status === 'archived'" value="published">Published</mat-option>
+        <mat-option [disabled]="jobAd.status === 'draft'" value="archived">Archived</mat-option>
       </mat-select>
     </mat-form-field>
 
