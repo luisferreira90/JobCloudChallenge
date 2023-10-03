@@ -16,6 +16,7 @@ Run `ng test` to execute the unit tests.
 ## Bonus features
 
 - Create invoice when creating the job ad (not just from the list);
+- Update list when updating jobAdStatus
 - The ability to receive notifications when a job ad is created, edited, or deleted.
 - Unit tests;
 - Debounce on searching for existing name in job creation form
