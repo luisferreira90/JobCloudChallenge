@@ -63,6 +63,14 @@ export class JobsListEffects {
     ),
   );
 
+  onUpdateJobAdSuccess$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updateJobAdStatusSuccess),
+      concatLatestFrom(() => this._store.select(selectJobsListParams)),
+      map(([action, jobsListParams]) => getJobsList({ params: jobsListParams })),
+    ),
+  );
+
   createInvoiceIfJobAdPublished$ = createEffect(() =>
     this._actions$.pipe(
       ofType(updateJobAdStatusSuccess),

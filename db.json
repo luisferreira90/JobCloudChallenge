@@ -5,7 +5,7 @@
       "title": "Database Administrator III",
       "description": "innovate e-business platforms",
       "skills[]": "Xilinx",
-      "status": "draft",
+      "status": "published",
       "_embedded": true,
       "createdAt": "2022-12-10T02:47:22Z",
       "updatedAt": "2022-08-17T17:34:21Z"
@@ -41,16 +41,6 @@
       "updatedAt": "2022-12-07T16:33:08Z"
     },
     {
-      "id": 8,
-      "title": "Civil Engineer",
-      "description": "envisioneer transparent functionalities",
-      "skills[]": "Web Services",
-      "status": "published",
-      "_embedded": false,
-      "createdAt": "2022-07-11T22:13:10Z",
-      "updatedAt": "2022-01-16T16:46:39Z"
-    },
-    {
       "id": 9,
       "title": "Marketing Manager",
       "description": "orchestrate vertical experiences",
@@ -65,7 +55,7 @@
       "title": "Safety Technician II",
       "description": "target integrated initiatives",
       "skills[]": "Ice Cream",
-      "status": "published",
+      "status": "archived",
       "_embedded": true,
       "createdAt": "2022-05-22T00:26:29Z",
       "updatedAt": "2023-05-04T07:35:57Z"
@@ -235,7 +225,7 @@
       "title": "Biostatistician IV",
       "description": "extend impactful e-tailers",
       "skills[]": "Zend Studio",
-      "status": "published",
+      "status": "archived",
       "_embedded": true,
       "createdAt": "2023-09-17T04:17:29Z",
       "updatedAt": "2021-08-23T20:47:29Z"
@@ -961,5 +951,14 @@
       "updatedAt": "2022-12-11T11:23:51Z"
     }
   ],
-  "invoices": []
+  "invoices": [
+    {
+      "jobAdId": 3,
+      "amount": 15,
+      "updatedAt": "2023-10-03T17:15:38.244Z",
+      "createdAt": "2023-10-03T17:15:38.244Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 1
+    }
+  ]
 }
