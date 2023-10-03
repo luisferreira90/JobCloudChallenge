@@ -66,8 +66,6 @@ export class JobAdStore extends ComponentStore<JobState> {
     return newJobAd$.pipe(
       switchMap((jobAd) => {
         if (jobAd.id) {
-          console.log('temos ID');
-
           return this._apiService.updateJob(jobAd).pipe(
             tap({
               next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_UPDATED }),

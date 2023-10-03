@@ -48,15 +48,16 @@
                [matChipInputFor]="skillGrid"
                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                placeholder="New skill"/>
-
       </mat-chip-grid>
     </mat-form-field>
 
-    <mat-error *ngIf="jobAdForm.get('skills').hasError('required')">
-      At least one skill is required
-    </mat-error>
+    <div class="skills-errors">
+      <mat-error *ngIf="jobAdForm.dirty && jobAdForm.get('skills').hasError('required')">
+        At least one skill is required
+      </mat-error>
+    </div>
 
-    <button [disabled]="jobAdForm.disabled || jobAdForm.invalid || jobAdForm.pristine"
+    <button [disabled]="jobAdForm.disabled || jobAdForm.invalid"
             color="primary"
             mat-raised-button>{{ jobAd?.id ? 'Update Job Ad' : 'Create New Job Ad' }}</button>
   </form>

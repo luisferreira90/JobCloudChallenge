@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-job-ad-form',
   templateUrl: './job-ad-form.component.html',
-  styleUrls: ['./job-ad-form.component.css'],
+  styleUrls: ['./job-ad-form.component.scss'],
   imports: [
     MatInputModule,
     MatSelectModule,
