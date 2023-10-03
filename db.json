@@ -1,4 +1,70 @@
 {
-  "jobs": [],
-  "invoices": []
+  "jobs": [
+    {
+      "id": 1,
+      "title": "Junior Web Developer",
+      "description": "This is an entry level position.",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ],
+      "status": "draft",
+      "updatedAt": "2023-10-03T20:48:38.362Z",
+      "createdAt": "2023-10-03T20:48:38.362Z"
+    },
+    {
+      "id": 2,
+      "title": "Mid-level Angular Engineer",
+      "description": "We expect you to be able to do... something. At the very least.",
+      "skills": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "NGRx",
+        "RxJS",
+        "PWA"
+      ],
+      "status": "published",
+      "updatedAt": "2023-10-03T20:51:08.211Z",
+      "createdAt": "2023-10-03T20:51:08.211Z"
+    },
+    {
+      "id": 3,
+      "title": "Senior Angular Engineer",
+      "description": "re you passionate about clean and readable frontend code, Angular & TypeScript are part of your DNA and working with Observables is pure routine for you? Then this job could be just right for you.\nBesides writing performant and readable code, you will also find your challenge in improving the development processes at JobCloud. For example, by fostering and sharing knowledge with both, senior but also less experienced colleagues alike. Become part of an open, collaborative and friendly team.\n\nFind out more about working in IT Engineering at JobCloud and why you should work for us",
+      "skills": [
+        "HTML",
+        "CSS",
+        "NgRx",
+        "TypeScript",
+        "AWS",
+        "Nx",
+        "GraphQL",
+        "CircleCi,",
+        "NestJS"
+      ],
+      "status": "published",
+      "updatedAt": "2023-10-03T20:53:08.325Z",
+      "createdAt": "2023-10-03T20:53:08.325Z"
+    }
+  ],
+  "invoices": [
+    {
+      "jobAdId": 2,
+      "amount": 65,
+      "updatedAt": "2023-10-03T20:51:08.222Z",
+      "createdAt": "2023-10-03T20:51:08.222Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 1
+    },
+    {
+      "jobAdId": 3,
+      "amount": 455,
+      "updatedAt": "2023-10-03T20:53:08.337Z",
+      "createdAt": "2023-10-03T20:53:08.337Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 2
+    }
+  ]
 }
