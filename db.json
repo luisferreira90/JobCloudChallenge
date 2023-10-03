@@ -1,35 +1,85 @@
 {
   "jobs": [
     {
-      "id": 1,
-      "title": "This is my first job",
-      "description": "Let's see if this description works perfectlyfffff",
+      "id": 2,
+      "title": "Create as a draft for now",
+      "description": "Vamos lá ver se isto serve",
       "skills": [
-        "JavaScript",
-        "CSS",
-        "HTML",
-        "PHP",
-        "Laravel"
+        "HTMLK"
       ],
-      "status": "draft",
-      "updatedAt": "2023-10-03T17:22:13.164Z",
-      "createdAt": "2023-10-03T17:21:01.568Z"
+      "status": "published",
+      "updatedAt": "2023-10-03T20:29:39.079Z",
+      "createdAt": "2023-10-03T20:29:39.079Z"
     },
     {
-      "id": 2,
-      "title": "This is my first job2",
-      "description": "Uh oh, repeated name",
+      "id": 3,
+      "title": "Mais um teste",
+      "description": "Vamos lá a isto rapaziada!",
       "skills": [
-        "haha",
-        "uhuh",
-        "ihih",
-        "ohoh",
-        "eheh"
+        "OUIII"
+      ],
+      "status": "archived",
+      "updatedAt": "2023-10-03T20:30:23.476Z",
+      "createdAt": "2023-10-03T20:30:14.692Z"
+    },
+    {
+      "id": 4,
+      "title": "JJHKFKJHF",
+      "description": "oiçoutçotutoutiouçoiçyy",
+      "skills": [
+        "jkkhjfg"
       ],
       "status": "draft",
-      "updatedAt": "2023-10-03T17:21:49.303Z",
-      "createdAt": "2023-10-03T17:21:49.303Z"
+      "updatedAt": "2023-10-03T20:31:02.275Z",
+      "createdAt": "2023-10-03T20:31:02.275Z"
+    },
+    {
+      "id": 5,
+      "title": "LKHHLHHHLKKLH",
+      "description": "LGKDAHASKHLGASKLGH",
+      "skills": [
+        "ASFASGAS"
+      ],
+      "status": "draft",
+      "updatedAt": "2023-10-03T20:31:30.241Z",
+      "createdAt": "2023-10-03T20:31:30.241Z"
+    },
+    {
+      "id": 6,
+      "title": "'937519'357'913579'1375",
+      "description": "'91Y3T90'1Y3T9'Y13T'",
+      "skills": [
+        "ASSAGSAGASG"
+      ],
+      "status": "published",
+      "updatedAt": "2023-10-03T20:31:39.431Z",
+      "createdAt": "2023-10-03T20:31:39.431Z"
     }
   ],
-  "invoices": []
+  "invoices": [
+    {
+      "jobAdId": 2,
+      "amount": 30,
+      "updatedAt": "2023-10-03T20:29:47.899Z",
+      "createdAt": "2023-10-03T20:29:47.899Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 2
+    },
+    {
+      "jobAdId": 3,
+      "amount": 25,
+      "updatedAt": "2023-10-03T20:30:20.238Z",
+      "createdAt": "2023-10-03T20:30:20.238Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 3
+    },
+    {
+      "jobAdId": 6,
+      "amount": 5,
+      "updatedAt": "2023-10-03T20:31:43.602Z",
+      "createdAt": "2023-10-03T20:31:43.602Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 4
+    }
+  ]
 }

@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { JobAdDto } from '../../../models/models';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable, of, switchMap, tap } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { ApiService } from '../../../shared/services/api/api.service';
+import { createInvoice } from '../../invoices-list/store/invoices-list.actions';
+import { Store } from '@ngrx/store';
 
 export const DEFAULT_JOB_AD = <JobAdDto>{
   id: null,
@@ -16,22 +18,21 @@ export const DEFAULT_JOB_AD = <JobAdDto>{
   _embedded: '',
 };
 
-export enum JobStateActions {
+export enum JobStateEvents {
   JOB_LOADED,
   JOB_CREATED,
-  JOB_DELETED,
   JOB_UPDATED,
-  NO_ACTION,
+  NO_EVENT,
 }
 
 export interface JobState {
   jobAd: JobAdDto;
-  action: JobStateActions;
+  action: JobStateEvents;
 }
 
 interface JobAdUpdaterParams {
   jobAd: JobAdDto;
-  action: JobStateActions;
+  event: JobStateEvents;
 }
 
 @Injectable()
@@ -41,7 +42,7 @@ export class JobAdStore extends ComponentStore<JobState> {
   readonly updaterJobAd = this.updater((state, params: JobAdUpdaterParams) => ({
     ...state,
     jobAd: params.jobAd,
-    action: params.action,
+    event: params.event,
   }));
 
   readonly getJobAd = this.effect((jobAdId$: Observable<number>) => {
@@ -50,13 +51,13 @@ export class JobAdStore extends ComponentStore<JobState> {
         if (!id) {
           this.updaterJobAd({
             jobAd: DEFAULT_JOB_AD,
-            action: JobStateActions.JOB_LOADED,
+            event: JobStateEvents.JOB_LOADED,
           });
           return of(DEFAULT_JOB_AD);
         }
         return this._apiService.getJob(id).pipe(
           tap({
-            next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_LOADED }),
+            next: (jobAd) => this.updaterJobAd({ jobAd, event: JobStateEvents.JOB_LOADED }),
             error: (e) => this.logError(e),
           }),
           catchError(() => EMPTY),
@@ -71,7 +72,7 @@ export class JobAdStore extends ComponentStore<JobState> {
         if (jobAd.id) {
           return this._apiService.updateJob(jobAd).pipe(
             tap({
-              next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_UPDATED }),
+              next: (jobAd) => this.updaterJobAd({ jobAd, event: JobStateEvents.JOB_UPDATED }),
               error: (e) => this.logError(e),
             }),
             catchError(() => EMPTY),
@@ -80,17 +81,25 @@ export class JobAdStore extends ComponentStore<JobState> {
 
         return this._apiService.createJob(jobAd).pipe(
           tap({
-            next: (jobAd) => this.updaterJobAd({ jobAd, action: JobStateActions.JOB_CREATED }),
+            next: (jobAd) => this.updaterJobAd({ jobAd, event: JobStateEvents.JOB_CREATED }),
             error: (e) => this.logError(e),
           }),
           catchError(() => EMPTY),
         );
       }),
+      map((jobAd) => {
+        if (jobAd.status === 'published') {
+          this._store.dispatch(createInvoice({ jobAd }));
+        }
+      }),
     );
   });
 
-  constructor(private readonly _apiService: ApiService) {
-    super({ jobAd: DEFAULT_JOB_AD, action: JobStateActions.NO_ACTION });
+  constructor(
+    private readonly _apiService: ApiService,
+    private readonly _store: Store,
+  ) {
+    super({ jobAd: DEFAULT_JOB_AD, action: JobStateEvents.NO_EVENT });
   }
 
   logError(error: string) {
