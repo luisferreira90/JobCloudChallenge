@@ -34,8 +34,8 @@ export class JobAdFormComponent {
   @Output()
   createUpdateJobAd = new EventEmitter<JobAdDto>();
 
-  jobAdForm: FormGroup;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
+  jobAdForm: FormGroup;
 
   constructor(
     private readonly _fb: FormBuilder,
@@ -94,7 +94,7 @@ export class JobAdFormComponent {
       title: [
         jobAd.title,
         Validators.required,
-        [JobAdTitleValidator.createValidator(this._apiService)],
+        [JobAdTitleValidator.checkIfNameAlreadyExistsValidator(this._apiService, jobAd.title)],
       ],
       description: [jobAd.description, Validators.required],
       skills: [[...jobAd.skills], Validators.required],
