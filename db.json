@@ -1,26 +1,6 @@
 {
   "jobs": [
     {
-      "id": 1,
-      "title": "Engineer I",
-      "description": "revolutionize compelling bandwidth",
-      "skills[]": "DSDM",
-      "status": "archived",
-      "_embedded": true,
-      "createdAt": "2023-09-28T23:02:24Z",
-      "updatedAt": "2021-08-27T21:28:03Z"
-    },
-    {
-      "id": 2,
-      "title": "Structural Engineer",
-      "description": "redefine one-to-one architectures",
-      "skills[]": "Big Box",
-      "status": "archived",
-      "_embedded": false,
-      "createdAt": "2021-08-01T05:33:11Z",
-      "updatedAt": "2023-05-30T22:33:02Z"
-    },
-    {
       "id": 3,
       "title": "Database Administrator III",
       "description": "innovate e-business platforms",
@@ -39,16 +19,6 @@
       "_embedded": false,
       "createdAt": "2022-08-09T18:00:04Z",
       "updatedAt": "2021-12-15T03:49:58Z"
-    },
-    {
-      "id": 5,
-      "title": "Computer Systems Analyst IV",
-      "description": "synergize enterprise schemas",
-      "skills[]": "Occupational Medicine",
-      "status": "archived",
-      "_embedded": false,
-      "createdAt": "2023-08-30T21:29:26Z",
-      "updatedAt": "2022-01-14T15:24:18Z"
     },
     {
       "id": 6,
@@ -99,16 +69,6 @@
       "_embedded": true,
       "createdAt": "2022-05-22T00:26:29Z",
       "updatedAt": "2023-05-04T07:35:57Z"
-    },
-    {
-      "id": 11,
-      "title": "Analyst Programmer",
-      "description": "innovate back-end e-services",
-      "skills[]": "Audio Editing",
-      "status": "archived",
-      "_embedded": false,
-      "createdAt": "2022-06-17T16:44:26Z",
-      "updatedAt": "2023-03-29T04:50:39Z"
     },
     {
       "id": 12,

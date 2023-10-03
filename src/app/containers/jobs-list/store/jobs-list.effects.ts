@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { catchError, exhaustMap, filter, map } from 'rxjs/operators';
 import {
   deleteJobAd,
@@ -14,6 +14,9 @@ import {
 import { of } from 'rxjs';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { createInvoice } from '../../invoices-list/store/invoices-list.actions';
+import { selectJobsListParams } from './jobs-list.selectors';
+import { Store } from '@ngrx/store';
+import { JobsListState } from './jobs-list.reducer';
 
 @Injectable()
 export class JobsListEffects {
@@ -37,6 +40,14 @@ export class JobsListEffects {
           .deleteJobAd(action.jobAd.id)
           .pipe(map(() => deleteJobAdSuccess({ jobAd: action.jobAd }))),
       ),
+    ),
+  );
+
+  onDeleteJobAdSuccess$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(deleteJobAdSuccess),
+      concatLatestFrom(() => this._store.select(selectJobsListParams)),
+      map(([action, jobsListParams]) => getJobsList({ params: jobsListParams })),
     ),
   );
 
@@ -65,5 +76,6 @@ export class JobsListEffects {
   constructor(
     private readonly _actions$: Actions,
     private readonly _apiService: ApiService,
+    private readonly _store: Store<JobsListState>,
   ) {}
 }
