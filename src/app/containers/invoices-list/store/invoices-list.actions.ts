@@ -33,10 +33,7 @@ export const createInvoiceError = createAction(
 
 export const deleteInvoice = createAction(
   '[Invoices List Page] Delete Invoice',
-  props<{
-    id: number;
-    params: BaseListParams;
-  }>(),
+  props<{ jobAdId: number }>(),
 );
 
 export const deleteInvoiceSuccess = createAction('[Invoices List Page] Delete Invoice Success');

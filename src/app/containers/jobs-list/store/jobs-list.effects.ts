@@ -17,7 +17,7 @@ import { JobsListState } from './jobs-list.reducer';
 import { Store } from '@ngrx/store';
 import { selectJobsListParams } from './jobs-list.selectors';
 import { ApiService } from '../../../shared/services/api/api.service';
-import { createInvoice } from '../../invoices-list/store/invoices-list.actions';
+import { createInvoice, deleteInvoice } from '../../invoices-list/store/invoices-list.actions';
 
 @Injectable()
 export class JobsListEffects {
@@ -37,7 +37,15 @@ export class JobsListEffects {
     this._actions$.pipe(
       ofType(deleteJobAd),
       exhaustMap((action) =>
-        this._apiService.deleteJobAd(action.id).pipe(
+        this._apiService.deleteJobAd(action.jobAd.id).pipe(
+          map((response) => deleteInvoice({ jobAdId: action.jobAd.id })),
+          // map((response) => {
+          //   if (action.jobAd.status !== 'draft') {
+          //     console.log('The invoice will have to be deleted');
+          //     return deleteInvoice({ jobAdId: action.jobAd.id });
+          //   }
+          //   return response;
+          // }),
           map(() => deleteJobAdSuccess()),
           concatLatestFrom(() => this._store.select(selectJobsListParams)),
           map(([action, jobsListParams]) => getJobsList({ params: jobsListParams })),

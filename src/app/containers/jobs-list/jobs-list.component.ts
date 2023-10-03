@@ -45,8 +45,8 @@ export class JobsListComponent implements OnInit {
     this._jobsListStore.dispatch(updateJobAdStatus({ jobAd }));
   }
 
-  deleteJobAd(id: number) {
-    this._jobsListStore.dispatch(deleteJobAd({ id }));
+  deleteJobAd(jobAd: JobAd) {
+    this._jobsListStore.dispatch(deleteJobAd({ jobAd }));
   }
 
   private _getJobsList(): void {

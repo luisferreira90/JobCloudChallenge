@@ -12,7 +12,7 @@ import {
   getInvoicesListError,
   getInvoicesListSuccess,
 } from './invoices-list.actions';
-import { of } from 'rxjs';
+import { of, tap } from 'rxjs';
 import { InvoicesListState } from './invoices-list.reducer';
 import { Store } from '@ngrx/store';
 import { ApiService } from '../../../shared/services/api/api.service';
@@ -44,15 +44,24 @@ export class InvoicesListEffects {
     ),
   );
 
-  deleteinvoice$ = createEffect(() =>
+  deleteInvoice$ = createEffect(() =>
     this._actions$.pipe(
       ofType(deleteInvoice),
-      exhaustMap((action) =>
-        this._apiService.deleteInvoice(action.id).pipe(
+      tap((r) => console.log('iside delete effects')),
+      exhaustMap((action) => {
+        console.log('inside delete invoice effect');
+        return this._apiService.getInvoice(action.jobAdId).pipe(
+          map((invoice) => {
+            console.log(invoice);
+            return this._apiService.deleteInvoice(invoice.id).pipe(
+              map(() => deleteInvoiceSuccess()),
+              catchError((error) => of(deleteInvoiceError({ errorMessage: error }))),
+            );
+          }),
           map(() => deleteInvoiceSuccess()),
           catchError((error) => of(deleteInvoiceError({ errorMessage: error }))),
-        ),
-      ),
+        );
+      }),
     ),
   );
 

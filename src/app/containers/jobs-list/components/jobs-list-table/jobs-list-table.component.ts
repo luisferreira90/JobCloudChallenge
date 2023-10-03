@@ -40,7 +40,7 @@ export class JobsListTableComponent {
   @Output()
   updateParams = new EventEmitter<Partial<JobsListPageParams>>();
   @Output()
-  deleteJobAd = new EventEmitter<number>();
+  deleteJobAd = new EventEmitter<JobAd>();
   @Output()
   changeJobAdStatus = new EventEmitter<JobAd>();
 
