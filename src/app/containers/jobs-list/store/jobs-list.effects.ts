@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map } from 'rxjs/operators';
+import { catchError, exhaustMap, filter, map } from 'rxjs/operators';
 import {
   deleteJobAd,
   deleteJobAdSuccess,
@@ -12,8 +12,6 @@ import {
   updateJobAdStatusSuccess,
 } from './jobs-list.actions';
 import { of } from 'rxjs';
-import { JobsListState } from './jobs-list.reducer';
-import { Store } from '@ngrx/store';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { createInvoice } from '../../invoices-list/store/invoices-list.actions';
 
@@ -48,22 +46,24 @@ export class JobsListEffects {
       exhaustMap((action) =>
         this._apiService.updateJob(action.jobAd).pipe(
           map((jobAd) => updateJobAdStatusSuccess({ jobAd })),
-          map((response) => {
-            const jobAd = response.jobAd;
-            if (response.jobAd.status === 'published') {
-              return createInvoice({ jobAd });
-            }
-            return response;
-          }),
           catchError((error) => of(updateJobAdStatusError({ errorMessage: error }))),
         ),
       ),
     ),
   );
 
+  createInvoiceIfJobAdPublished$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(updateJobAdStatusSuccess),
+      filter((action) => action.jobAd.status === 'published'),
+      map((action) => {
+        return createInvoice({ jobAd: action.jobAd });
+      }),
+    ),
+  );
+
   constructor(
     private readonly _actions$: Actions,
     private readonly _apiService: ApiService,
-    private readonly _store: Store<JobsListState>,
   ) {}
 }
