@@ -31,6 +31,21 @@ export const createInvoiceError = createAction(
   props<{ errorMessage: string }>(),
 );
 
+export const getInvoiceByJobAdId = createAction(
+  '[Invoices List Page] Get Invoice By Job Ad Id',
+  props<{ jobAdId: number }>(),
+);
+
+export const getInvoiceByJobAdIdSuccess = createAction(
+  '[Invoices List Page] Get Invoice By Job Ad Id Success',
+  props<{ invoice: InvoiceDto }>(),
+);
+
+export const getInvoiceByJobAdIdError = createAction(
+  '[Invoices List Page] Get Invoice By Job Ad Id Error',
+  props<{ errorMessage: string }>(),
+);
+
 export const deleteInvoice = createAction(
   '[Invoices List Page] Delete Invoice',
   props<{ jobAdId: number }>(),

@@ -5,18 +5,18 @@ import {
   createInvoice,
   createInvoiceError,
   createInvoiceSuccess,
-  deleteInvoice,
-  deleteInvoiceError,
   deleteInvoiceSuccess,
+  getInvoiceByJobAdIdSuccess,
   getInvoicesList,
   getInvoicesListError,
   getInvoicesListSuccess,
 } from './invoices-list.actions';
-import { of, tap } from 'rxjs';
+import { of } from 'rxjs';
 import { InvoicesListState } from './invoices-list.reducer';
 import { Store } from '@ngrx/store';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { buildInvoice } from './invoices-list.helper';
+import { deleteJobAdSuccess } from '../../jobs-list/store/jobs-list.actions';
 
 @Injectable()
 export class InvoicesListEffects {
@@ -44,24 +44,23 @@ export class InvoicesListEffects {
     ),
   );
 
+  getInvoiceByJobAdId$ = createEffect(() =>
+    this._actions$.pipe(
+      ofType(deleteJobAdSuccess),
+      exhaustMap((action) =>
+        this._apiService
+          .getInvoiceByJobAdId(action.jobAd.id)
+          .pipe(map((invoice) => getInvoiceByJobAdIdSuccess({ invoice: invoice[0] }))),
+      ),
+    ),
+  );
+
   deleteInvoice$ = createEffect(() =>
     this._actions$.pipe(
-      ofType(deleteInvoice),
-      tap((r) => console.log('iside delete effects')),
-      exhaustMap((action) => {
-        console.log('inside delete invoice effect');
-        return this._apiService.getInvoice(action.jobAdId).pipe(
-          map((invoice) => {
-            console.log(invoice);
-            return this._apiService.deleteInvoice(invoice.id).pipe(
-              map(() => deleteInvoiceSuccess()),
-              catchError((error) => of(deleteInvoiceError({ errorMessage: error }))),
-            );
-          }),
-          map(() => deleteInvoiceSuccess()),
-          catchError((error) => of(deleteInvoiceError({ errorMessage: error }))),
-        );
-      }),
+      ofType(getInvoiceByJobAdIdSuccess),
+      exhaustMap((action) =>
+        this._apiService.deleteInvoice(action.invoice.id).pipe(map(() => deleteInvoiceSuccess())),
+      ),
     ),
   );
 

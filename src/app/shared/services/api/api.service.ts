@@ -84,12 +84,11 @@ export class ApiService {
     );
   }
 
-  getInvoice(id: number): Observable<InvoiceDto> {
-    console.log('getting invoice API call');
+  getInvoiceByJobAdId(jobAdId: number): Observable<InvoiceDto[]> {
     const urlSearchParams = new URLSearchParams();
-    urlSearchParams.set('jobAdId', id.toString());
-    return <Observable<InvoiceDto>>(
-      this._httpClient.get(`${API_URL}/invoices/${id}?${urlSearchParams.toString()}`)
+    urlSearchParams.set('jobAdId', jobAdId.toString());
+    return <Observable<InvoiceDto[]>>(
+      this._httpClient.get(`${API_URL}/invoices?${urlSearchParams.toString()}`)
     );
   }
 

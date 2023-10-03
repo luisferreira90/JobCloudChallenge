@@ -23,7 +23,10 @@ export const deleteJobAd = createAction(
   }>(),
 );
 
-export const deleteJobAdSuccess = createAction('[Jobs List Page] Delete Job Ad Success');
+export const deleteJobAdSuccess = createAction(
+  '[Jobs List Page] Delete Job Ad Success',
+  props<{ jobAd: JobAd }>(),
+);
 
 export const deleteJobAdError = createAction(
   '[Jobs List Page] Delete Job Ad Error',
