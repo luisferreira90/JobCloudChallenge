@@ -12,30 +12,23 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const API_URL = 'http://localhost:3000';
+const FILTERS_MAP = new Map([
+  ['page', '_page'],
+  ['pageSize', '_limit'],
+  ['sort', '_sort'],
+  ['order', '_order'],
+  ['query', 'title_like'],
+  ['status', 'status'],
+]);
 
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
-  filtersMap = new Map([
-    ['page', '_page'],
-    ['pageSize', '_limit'],
-    ['sort', '_sort'],
-    ['order', '_order'],
-    ['query', 'title_like'],
-    ['status', 'status'],
-  ]);
-
   constructor(private readonly _httpClient: HttpClient) {}
 
   getJobsList(params: JobsListPageParams): Observable<JobAdsListResponse> {
-    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
-    // This is a little hack that should not be present in production
-    const paramsCopy = {
-      ...params,
-      page: params.page + 1,
-    };
-
+    const paramsCopy = this._updateParamsToJsonServer(params);
     const urlSearchParams = this._returnQueryParams(paramsCopy);
 
     return <Observable<JobAdsListResponse>>(
@@ -70,11 +63,8 @@ export class ApiService {
   }
 
   getInvoicesList(params: BaseListParams): Observable<InvoiceListResponse> {
-    const urlSearchParams = new URLSearchParams();
-
-    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
-    urlSearchParams.set('_page', (params.page + 1).toString());
-    urlSearchParams.set('_limit', params.pageSize.toString());
+    const paramsCopy = this._updateParamsToJsonServer(params);
+    const urlSearchParams = this._returnQueryParams(paramsCopy);
 
     return <Observable<InvoiceListResponse>>(
       this._httpClient
@@ -115,6 +105,15 @@ export class ApiService {
     );
   }
 
+  private _updateParamsToJsonServer(params: BaseListParams): BaseListParams {
+    // json-server pages start at 1, while Angular Material's Paginator starts at 0, hence the +1
+    // This is a little hack that should not be present in production
+    return {
+      ...params,
+      page: params.page + 1,
+    };
+  }
+
   private _returnQueryParams<T>(params: T): URLSearchParams {
     const urlSearchParams = new URLSearchParams();
 
@@ -122,7 +121,7 @@ export class ApiService {
     paramsKeys.forEach((key: string) => {
       const value = params[key as keyof T];
       if (value) {
-        urlSearchParams.set(this.filtersMap.get(key), value.toString());
+        urlSearchParams.set(FILTERS_MAP.get(key), value.toString());
       }
     });
 
