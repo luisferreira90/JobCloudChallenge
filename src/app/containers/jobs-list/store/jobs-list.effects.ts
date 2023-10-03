@@ -18,7 +18,6 @@ import { Store } from '@ngrx/store';
 import { selectJobsListParams } from './jobs-list.selectors';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { createInvoice } from '../../invoices-list/store/invoices-list.actions';
-import { InvoiceDto } from '../../../models/models';
 
 @Injectable()
 export class JobsListEffects {
@@ -57,15 +56,7 @@ export class JobsListEffects {
           map((response) => {
             const jobAd = response.jobAd;
             if (response.jobAd.status === 'published') {
-              const invoice = <InvoiceDto>{
-                jobAdId: jobAd.id,
-                amount: Math.random(),
-                updatedAt: new Date(),
-                createdAt: new Date(),
-                dueDate: new Date(),
-              };
-              console.log(invoice);
-              return createInvoice({ invoice });
+              return createInvoice({ jobAd });
             }
             return response;
           }),

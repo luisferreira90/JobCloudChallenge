@@ -16,6 +16,7 @@ import { of } from 'rxjs';
 import { InvoicesListState } from './invoices-list.reducer';
 import { Store } from '@ngrx/store';
 import { ApiService } from '../../../shared/services/api/api.service';
+import { buildInvoice } from './invoices-list.helper';
 
 @Injectable()
 export class InvoicesListEffects {
@@ -35,8 +36,7 @@ export class InvoicesListEffects {
     this._actions$.pipe(
       ofType(createInvoice),
       exhaustMap((action) => {
-        console.log(action);
-        return this._apiService.createInvoice(action.invoice).pipe(
+        return this._apiService.createInvoice(buildInvoice(action.jobAd)).pipe(
           map((invoice) => createInvoiceSuccess({ invoice })),
           catchError((error) => of(createInvoiceError({ errorMessage: error }))),
         );

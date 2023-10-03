@@ -61,7 +61,7 @@
         "xUnit",
         "Freight"
       ],
-      "status": "draft"
+      "status": "published"
     },
     {
       "id": 18,
@@ -74,7 +74,7 @@
         "Red Hat Linux",
         "SDI"
       ],
-      "status": "draft"
+      "status": "published"
     },
     {
       "id": 21,
@@ -87,7 +87,7 @@
         "BtB",
         "BCMS"
       ],
-      "status": "draft"
+      "status": "published"
     },
     {
       "id": 23,
@@ -100,7 +100,7 @@
         "Kurdish",
         "Property &amp; Casualty Insurance"
       ],
-      "status": "draft"
+      "status": "published"
     },
     {
       "id": 28,
@@ -1106,6 +1106,38 @@
       "createdAt": "2023-10-03T10:48:04.772Z",
       "dueDate": "2023-10-03T10:48:04.772Z",
       "id": 2
+    },
+    {
+      "jobAdId": 16,
+      "amount": 15,
+      "updatedAt": "2023-10-03T10:56:52.703Z",
+      "createdAt": "2023-10-03T10:56:52.703Z",
+      "dueDate": "2023-10-03T10:56:52.703Z",
+      "id": 3
+    },
+    {
+      "jobAdId": 18,
+      "amount": 15,
+      "updatedAt": "2023-11-03T12:15:40.664Z",
+      "createdAt": "2023-11-03T12:15:40.664Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 4
+    },
+    {
+      "jobAdId": 21,
+      "amount": 15,
+      "updatedAt": "2023-10-03T11:17:09.560Z",
+      "createdAt": "2023-10-03T11:17:09.560Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 5
+    },
+    {
+      "jobAdId": 23,
+      "amount": 15,
+      "updatedAt": "2023-10-16T11:18:31.434Z",
+      "createdAt": "2023-10-16T11:18:31.434Z",
+      "dueDate": "2023-12-31T00:00:00.000Z",
+      "id": 6
     }
   ]
 }
