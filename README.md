@@ -13,10 +13,6 @@ If you don't, the application will have no data in the beginning (and that's per
 
 Run `ng test` to execute the unit tests.
 
-## Challenge
-
-- When a job ad is deleted, all of its related data, such as the invoice, should also be deleted.
-
 ## Bonus features
 
 - The ability to receive notifications when a job ad is created, edited, or deleted.
