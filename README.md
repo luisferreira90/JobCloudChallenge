@@ -15,8 +15,7 @@ If you don't, the application will have no data in the beginning (and that's per
 
 Run `ng test` to execute the unit tests.
 
-## Bonus features
+## Missing features
 
-- Create invoice when creating the job ad (not just from the list);
 - Unit tests;
 - The ability to receive notifications when a job ad is created, edited, or deleted.
