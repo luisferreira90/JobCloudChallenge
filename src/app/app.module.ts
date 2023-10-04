@@ -10,6 +10,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { ApiModule } from './shared/services/api/api.module';
 import { InvoicesListEffects } from './containers/invoices-list/store/invoices-list.effects';
+import { NotificationsModule } from './shared/services/notifications/notifications.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { InvoicesListEffects } from './containers/invoices-list/store/invoices-l
     AppRoutingModule,
     HeaderComponent,
     ApiModule,
+    NotificationsModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([InvoicesListEffects]),
   ],
