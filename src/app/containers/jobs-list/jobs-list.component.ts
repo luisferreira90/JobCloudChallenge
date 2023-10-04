@@ -61,8 +61,6 @@ export class JobsListComponent implements OnInit {
       )
       .subscribe((action) => {
         switch (action) {
-          case JobsListStateEvents.JOB_LIST_LOADED:
-            break;
           case JobsListStateEvents.JOB_DELETED:
             this._snackBarService.displayMessage('Job Ad deleted');
             break;

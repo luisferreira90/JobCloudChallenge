@@ -42,22 +42,6 @@ describe('JobsListTableComponent ', () => {
     expect(spy).toHaveBeenCalledWith({ sort: 'title', order: 'asc', page: 0 });
   });
 
-  it('should update the params when sorting', () => {
-    // GIVEN
-    const spy = jest.spyOn(spectator.component.updateParams, 'emit');
-
-    const sortOptions = <Sort>{
-      active: 'title',
-      direction: 'asc',
-    };
-
-    // WHEN
-    spectator.component.sortChange(sortOptions);
-
-    // THEN
-    expect(spy).toHaveBeenCalledWith({ sort: 'title', order: 'asc', page: 0 });
-  });
-
   it('should use the default sort params if no direction is selected', () => {
     // GIVEN
     const spy = jest.spyOn(spectator.component.updateParams, 'emit');
