@@ -16,6 +16,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { JobsListState, JobsListStateEvents } from './store/jobs-list.reducer';
 import { JobAd } from '../../models/models';
 import { NoResultsComponent } from '../../shared/components/no-results/no-results.component';
+import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.service';
 
 const defaultJobAd = <JobAd>{
   id: 1,
@@ -27,6 +28,7 @@ const defaultJobAd = <JobAd>{
 describe('JobsListComponent', () => {
   let spectator: Spectator<JobsListComponent>;
   let store: MockStore<JobsListStateEvents>;
+  let snackBarService: SnackBarService;
 
   const initialState: JobsListState = {
     jobsList: [],
@@ -71,6 +73,7 @@ describe('JobsListComponent', () => {
   beforeEach(() => {
     spectator = createComponent();
     store = spectator.inject(MockStore);
+    snackBarService = spectator.inject(SnackBarService);
   });
 
   it('should get the correct number of jobs from the store', async () => {
@@ -90,7 +93,7 @@ describe('JobsListComponent', () => {
 
   it('should show the table if we have at least one job ad', async () => {
     // GIVEN
-    store.overrideSelector(selectJobsList, [<JobAd>{ id: 1 }]);
+    store.overrideSelector(selectJobsList, [{ ...defaultJobAd }]);
     store.refreshState();
 
     // WHEN
@@ -114,5 +117,31 @@ describe('JobsListComponent', () => {
     // THEN
     expect(spectator.query('app-jobs-list-table')).not.toExist();
     expect(spectator.query('app-no-results')).toExist();
+  });
+
+  it('should call the snack bar if a job ad is deleted', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsListEvent, JobsListStateEvents.JOB_DELETED);
+    store.refreshState();
+    const snackBarSpy = jest.spyOn(snackBarService, 'displayMessage');
+
+    // WHEN
+    spectator.component.ngOnInit();
+
+    // THEN
+    expect(snackBarSpy).toHaveBeenCalledWith('Job Ad deleted');
+  });
+
+  it('should call the snack bar if a job ad is updated', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsListEvent, JobsListStateEvents.JOB_STATUS_UPDATED);
+    store.refreshState();
+    const snackBarSpy = jest.spyOn(snackBarService, 'displayMessage');
+
+    // WHEN
+    spectator.component.ngOnInit();
+
+    // THEN
+    expect(snackBarSpy).toHaveBeenCalledWith('Job Ad status updated successfully');
   });
 });
