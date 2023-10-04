@@ -10,8 +10,3 @@
 
 This project comes with a pre-defined database. If you want to use it, rename the file `_db.json` to `db.json`.
 If you don't, the application will have no data in the beginning (and that's perfectly fine).
-
-## Missing features
-
-- Unit tests;
-- The ability to receive notifications when a job ad is created, edited, or deleted.
