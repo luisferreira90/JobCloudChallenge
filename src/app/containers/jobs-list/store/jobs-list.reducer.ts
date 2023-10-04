@@ -10,7 +10,7 @@ export enum JobsListStateEvents {
   JOB_STATUS_UPDATED,
 
   ERROR,
-  NO_ACTION,
+  NO_EVENT,
 }
 
 export interface JobsListState {
@@ -28,7 +28,7 @@ export const initialState: JobsListState = {
     page: 1,
     pageSize: 10,
   },
-  event: JobsListStateEvents.NO_ACTION,
+  event: JobsListStateEvents.NO_EVENT,
   error: '',
 };
 

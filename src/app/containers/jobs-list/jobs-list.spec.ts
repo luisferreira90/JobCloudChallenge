@@ -6,15 +6,35 @@ import { JobsListTableComponent } from './components/jobs-list-table/jobs-list-t
 import { TablePaginatorComponent } from '../../shared/components/table-paginator/table-paginator.component';
 import { LetDirective } from '@ngrx/component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
-import { selectJobsList, selectJobsListTotalCount } from './store/jobs-list.selectors';
-import { ApiService } from '../../shared/services/api/api.service';
-import { of } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import {
+  selectJobsList,
+  selectJobsListEvent,
+  selectJobsListTotalCount,
+} from './store/jobs-list.selectors';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { JobsListState, JobsListStateEvents } from './store/jobs-list.reducer';
+import { JobAd } from '../../models/models';
+import { NoResultsComponent } from '../../shared/components/no-results/no-results.component';
 
+const defaultJobAd = <JobAd>{
+  id: 1,
+  title: 'Mock title',
+  description: 'This is a test description',
+  status: 'published',
+  skills: ['JavaScript'],
+};
 describe('JobsListComponent', () => {
   let spectator: Spectator<JobsListComponent>;
-  let apiService: ApiService;
+  let store: MockStore;
+
+  const initialState: JobsListState = {
+    jobsList: [],
+    totalCount: 0,
+    jobsListParams: null,
+    error: '',
+    event: JobsListStateEvents.NO_EVENT,
+  };
 
   const createComponent = createComponentFactory({
     component: JobsListComponent,
@@ -26,23 +46,22 @@ describe('JobsListComponent', () => {
       SnackBarModule,
       HttpClientTestingModule,
       LetDirective,
+      NoResultsComponent,
     ],
     providers: [
       provideMockStore({
         selectors: [
           {
             selector: selectJobsList,
-            value: [
-              {
-                id: 1,
-                title: 'Web Dev',
-                status: 'draft',
-              },
-            ],
+            value: [],
           },
           {
             selector: selectJobsListTotalCount,
             value: 1,
+          },
+          {
+            selector: selectJobsListEvent,
+            value: JobsListStateEvents.NO_EVENT,
           },
         ],
       }),
@@ -51,33 +70,34 @@ describe('JobsListComponent', () => {
 
   beforeEach(() => {
     spectator = createComponent();
-    apiService = spectator.inject(ApiService);
+    store = spectator.inject(MockStore);
   });
 
-  it('should find an element of the list', () => {
+  afterEach(() => {
+    store?.resetSelectors();
+  });
+
+  it('should find an element of the list', async () => {
     // GIVEN
-    jest.spyOn(apiService, 'getJobsList').mockReturnValue(
-      of({
-        jobAds: [
-          {
-            id: 1,
-            title: 'Web Dev',
-            description: 'Test description',
-            status: 'draft',
-            skills: ['JavaScript'],
-          },
-        ],
-        totalCount: 1,
-      }),
-    );
+    store.overrideSelector(selectJobsList, [{ ...defaultJobAd }, { ...defaultJobAd, id: 2 }]);
+
+    store.refreshState();
 
     // WHEN
     spectator.component.ngOnInit();
+    spectator.detectChanges();
+
+    // Wait for the async operation to complete
+    await spectator.fixture.whenStable();
 
     // THEN
-    spectator.component.vm$.subscribe((data) => {
-      console.log(data);
-      expect(data.totalCount).toEqual(0);
-    });
+
+    // THEN
+    expect(
+      selectJobsListTotalCount.projector({
+        ...initialState,
+        totalCount: 2,
+      }),
+    ).toEqual(2);
   });
 });
