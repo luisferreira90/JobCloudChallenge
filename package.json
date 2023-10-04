@@ -48,6 +48,7 @@
     "@nx/angular": "16.9.1",
     "@nx/workspace": "16.9.1",
     "@schematics/angular": "^16.2.4",
+    "mockdate": "^3.0.5",
     "nx": "16.9.1",
     "nx-cloud": "latest",
     "prettier": "3.0.3",

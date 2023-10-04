@@ -1,9 +1,7 @@
 <ng-container *ngrxLet="vm$ as vm">
   <h1>Jobs List</h1>
 
-  <app-jobs-list-filters (updateParams)="updateParams($event)"
-                         [jobsListParams]="jobsListParams">
-  </app-jobs-list-filters>
+  <app-jobs-list-filters (updateParams)="updateParams($event)"></app-jobs-list-filters>
 
   <ng-container *ngIf="vm.jobsList.length > 0; else noResults">
     <app-jobs-list-table (changeJobAdStatus)="changeJobAdStatus($event)"

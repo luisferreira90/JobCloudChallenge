@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { JobAdDto } from '../../../models/models';
+import { JobAd, JobAdDto } from '../../../models/models';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable, of, switchMap, tap } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { createInvoice } from '../../invoices-list/store/invoices-list.actions';
 import { Store } from '@ngrx/store';
+import { NotificationsService } from '../../../shared/services/notifications/notifications.service';
 
 export const DEFAULT_JOB_AD = <JobAdDto>{
   id: null,
@@ -27,7 +28,7 @@ export enum JobStateEvents {
 
 export interface JobState {
   jobAd: JobAdDto;
-  action: JobStateEvents;
+  event: JobStateEvents;
 }
 
 interface JobAdUpdaterParams {
@@ -75,6 +76,7 @@ export class JobAdStore extends ComponentStore<JobState> {
               next: (jobAd) => this.updaterJobAd({ jobAd, event: JobStateEvents.JOB_UPDATED }),
               error: (e) => this.logError(e),
             }),
+            tap((jobAd) => this.notificationHandler(jobAd, `Job #${jobAd.id} updated`)),
             catchError(() => EMPTY),
           );
         }
@@ -84,6 +86,7 @@ export class JobAdStore extends ComponentStore<JobState> {
             next: (jobAd) => this.updaterJobAd({ jobAd, event: JobStateEvents.JOB_CREATED }),
             error: (e) => this.logError(e),
           }),
+          tap((jobAd) => this.notificationHandler(jobAd, `Job Ad created with ID #${jobAd.id}`)),
           catchError(() => EMPTY),
         );
       }),
@@ -98,11 +101,19 @@ export class JobAdStore extends ComponentStore<JobState> {
   constructor(
     private readonly _apiService: ApiService,
     private readonly _store: Store,
+    private readonly _notificationsService: NotificationsService,
   ) {
-    super({ jobAd: DEFAULT_JOB_AD, action: JobStateEvents.NO_EVENT });
+    super({ jobAd: DEFAULT_JOB_AD, event: JobStateEvents.NO_EVENT });
   }
 
   logError(error: string) {
     return error;
+  }
+
+  notificationHandler(jobAd: JobAd, body: string) {
+    return this._notificationsService.createNotification({
+      title: `${jobAd.title}`,
+      body: `${body}`,
+    });
   }
 }

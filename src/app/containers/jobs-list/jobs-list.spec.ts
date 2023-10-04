@@ -6,15 +6,37 @@ import { JobsListTableComponent } from './components/jobs-list-table/jobs-list-t
 import { TablePaginatorComponent } from '../../shared/components/table-paginator/table-paginator.component';
 import { LetDirective } from '@ngrx/component';
 import { RouterTestingModule } from '@angular/router/testing';
-import { provideMockStore } from '@ngrx/store/testing';
-import { selectJobsList, selectJobsListTotalCount } from './store/jobs-list.selectors';
-import { ApiService } from '../../shared/services/api/api.service';
-import { of } from 'rxjs';
+import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import {
+  selectJobsList,
+  selectJobsListEvent,
+  selectJobsListTotalCount,
+} from './store/jobs-list.selectors';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { JobsListState, JobsListStateEvents } from './store/jobs-list.reducer';
+import { JobAd } from '../../models/models';
+import { NoResultsComponent } from '../../shared/components/no-results/no-results.component';
+import { SnackBarService } from '../../shared/services/snack-bar/snack-bar.service';
 
+const defaultJobAd = <JobAd>{
+  id: 1,
+  title: 'Mock title',
+  description: 'This is a test description',
+  status: 'published',
+  skills: ['JavaScript'],
+};
 describe('JobsListComponent', () => {
   let spectator: Spectator<JobsListComponent>;
-  let apiService: ApiService;
+  let store: MockStore<JobsListStateEvents>;
+  let snackBarService: SnackBarService;
+
+  const initialState: JobsListState = {
+    jobsList: [],
+    totalCount: 0,
+    jobsListParams: null,
+    error: '',
+    event: JobsListStateEvents.NO_EVENT,
+  };
 
   const createComponent = createComponentFactory({
     component: JobsListComponent,
@@ -26,23 +48,22 @@ describe('JobsListComponent', () => {
       SnackBarModule,
       HttpClientTestingModule,
       LetDirective,
+      NoResultsComponent,
     ],
     providers: [
       provideMockStore({
         selectors: [
           {
             selector: selectJobsList,
-            value: [
-              {
-                id: 1,
-                title: 'Web Dev',
-                status: 'draft',
-              },
-            ],
+            value: [],
           },
           {
             selector: selectJobsListTotalCount,
             value: 1,
+          },
+          {
+            selector: selectJobsListEvent,
+            value: JobsListStateEvents.NO_EVENT,
           },
         ],
       }),
@@ -51,33 +72,76 @@ describe('JobsListComponent', () => {
 
   beforeEach(() => {
     spectator = createComponent();
-    apiService = spectator.inject(ApiService);
+    store = spectator.inject(MockStore);
+    snackBarService = spectator.inject(SnackBarService);
   });
 
-  it('should find an element of the list', () => {
+  it('should get the correct number of jobs from the store', async () => {
     // GIVEN
-    jest.spyOn(apiService, 'getJobsList').mockReturnValue(
-      of({
-        jobAds: [
-          {
-            id: 1,
-            title: 'Web Dev',
-            description: 'Test description',
-            status: 'draft',
-            skills: ['JavaScript'],
-          },
-        ],
-        totalCount: 1,
-      }),
-    );
+    const result = selectJobsList.projector({
+      ...initialState,
+      jobsList: [{ ...defaultJobAd }, { ...defaultJobAd, id: 2 }, { ...defaultJobAd, id: 3 }],
+    });
+
+    // WHEN
+    spectator.component.ngOnInit();
+    spectator.detectChanges();
+
+    // THEN
+    expect(result.length).toEqual(3);
+  });
+
+  it('should show the table if we have at least one job ad', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsList, [{ ...defaultJobAd }]);
+    store.refreshState();
+
+    // WHEN
+    spectator.component.ngOnInit();
+    spectator.detectComponentChanges();
+
+    // THEN
+    expect(spectator.query('app-jobs-list-table')).toExist();
+    expect(spectator.query('app-no-results')).not.toExist();
+  });
+
+  it('should show the no results component if we have no job ads', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsList, []);
+    store.refreshState();
+
+    // WHEN
+    spectator.component.ngOnInit();
+    spectator.detectComponentChanges();
+
+    // THEN
+    expect(spectator.query('app-jobs-list-table')).not.toExist();
+    expect(spectator.query('app-no-results')).toExist();
+  });
+
+  it('should call the snack bar if a job ad is deleted', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsListEvent, JobsListStateEvents.JOB_DELETED);
+    store.refreshState();
+    const snackBarSpy = jest.spyOn(snackBarService, 'displayMessage');
 
     // WHEN
     spectator.component.ngOnInit();
 
     // THEN
-    spectator.component.vm$.subscribe((data) => {
-      console.log(data);
-      expect(data.totalCount).toEqual(0);
-    });
+    expect(snackBarSpy).toHaveBeenCalledWith('Job Ad deleted');
+  });
+
+  it('should call the snack bar if a job ad is updated', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsListEvent, JobsListStateEvents.JOB_STATUS_UPDATED);
+    store.refreshState();
+    const snackBarSpy = jest.spyOn(snackBarService, 'displayMessage');
+
+    // WHEN
+    spectator.component.ngOnInit();
+
+    // THEN
+    expect(snackBarSpy).toHaveBeenCalledWith('Job Ad status updated successfully');
   });
 });

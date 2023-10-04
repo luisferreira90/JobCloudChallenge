@@ -37,7 +37,7 @@ export class JobAdComponent implements OnInit {
 
   private _listenToStoreActions(): void {
     this._jobStore.jobState$.pipe(untilDestroyed(this)).subscribe((state) => {
-      switch (state.action) {
+      switch (state.event) {
         case JobStateEvents.JOB_CREATED:
           this._handleJobCreationSuccess(state.jobAd);
           break;

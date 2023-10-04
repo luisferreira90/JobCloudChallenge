@@ -17,6 +17,8 @@ import { createInvoice } from '../../invoices-list/store/invoices-list.actions';
 import { selectJobsListParams } from './jobs-list.selectors';
 import { Store } from '@ngrx/store';
 import { JobsListState } from './jobs-list.reducer';
+import { NotificationsService } from '../../../shared/services/notifications/notifications.service';
+import { JobAd } from '../../../models/models';
 
 @Injectable()
 export class JobsListEffects {
@@ -46,6 +48,10 @@ export class JobsListEffects {
   onDeleteJobAdSuccess$ = createEffect(() =>
     this._actions$.pipe(
       ofType(deleteJobAdSuccess),
+      map((response) => {
+        this.notificationHandler(response.jobAd, 'deleted');
+        return response;
+      }),
       concatLatestFrom(() => this._store.select(selectJobsListParams)),
       map(([action, jobsListParams]) => getJobsList({ params: jobsListParams })),
     ),
@@ -66,6 +72,10 @@ export class JobsListEffects {
   onUpdateJobAdSuccess$ = createEffect(() =>
     this._actions$.pipe(
       ofType(updateJobAdStatusSuccess),
+      map((response) => {
+        this.notificationHandler(response.jobAd, 'status updated');
+        return response;
+      }),
       concatLatestFrom(() => this._store.select(selectJobsListParams)),
       map(([action, jobsListParams]) => getJobsList({ params: jobsListParams })),
     ),
@@ -85,5 +95,13 @@ export class JobsListEffects {
     private readonly _actions$: Actions,
     private readonly _apiService: ApiService,
     private readonly _store: Store<JobsListState>,
+    private readonly _notificationsService: NotificationsService,
   ) {}
+
+  notificationHandler(jobAd: JobAd, action: string) {
+    return this._notificationsService.createNotification({
+      body: `Job Ad #${jobAd.id} ${action}`,
+      title: `${jobAd.title}`,
+    });
+  }
 }
