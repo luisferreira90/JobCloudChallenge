@@ -11,10 +11,6 @@
 This project comes with a pre-defined database. If you want to use it, rename the file `_db.json` to `db.json`.
 If you don't, the application will have no data in the beginning (and that's perfectly fine).
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests.
-
 ## Missing features
 
 - Unit tests;
