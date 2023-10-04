@@ -12,7 +12,11 @@ export interface Notification {
   providedIn: 'root',
 })
 export class NotificationsService {
-  constructor() {}
+  createNotification(params: Notification) {
+    if (this.requestNotificationsPermission()) {
+      new Notification(params.title, { body: params.body, icon: params.icon || DEFAULT_ICON });
+    }
+  }
 
   /**
    * Modified version of https://developer.mozilla.org/en-US/docs/Web/API/Notification/permission_static
@@ -34,9 +38,5 @@ export class NotificationsService {
       );
     }
     return false;
-  }
-
-  createNotification(params: Notification) {
-    new Notification(params.title, { body: params.body, icon: params.icon || DEFAULT_ICON });
   }
 }

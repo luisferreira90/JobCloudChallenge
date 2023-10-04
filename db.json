@@ -1,5 +1,105 @@
 {
   "jobs": [
+    {
+      "id": 1,
+      "title": "Create a new one",
+      "description": "This is a test",
+      "skills": [
+        "Please",
+        "work"
+      ],
+      "status": "draft",
+      "updatedAt": "2023-10-04T17:03:06.864Z",
+      "createdAt": "2023-10-04T17:02:53.995Z"
+    },
+    {
+      "id": 2,
+      "title": "asgasgas",
+      "description": "gasgasgasgasgasg",
+      "skills": [
+        "asgasgasg"
+      ],
+      "status": "draft",
+      "updatedAt": "2023-10-04T17:03:52.721Z",
+      "createdAt": "2023-10-04T17:03:43.195Z"
+    },
+    {
+      "id": 3,
+      "title": "          tap((jobAd) => this.notificationHandler(jobAd, `Job Ad created with ID #${jobAd.id}`)),",
+      "description": "avas          tap((jobAd) => this.notificationHandler(jobAd, `Job Ad created with ID #${jobAd.id}`)),\n",
+      "skills": [
+        "tap((jobAd) => this.notificationHandler(jobAd, `Job Ad created with ID #${jobAd.id}`)),"
+      ],
+      "status": "draft",
+      "updatedAt": "2023-10-04T17:04:32.211Z",
+      "createdAt": "2023-10-04T17:04:32.211Z"
+    },
+    {
+      "id": 4,
+      "title": "osgfyoasgasgasgasgasg",
+      "description": "oioipgasgasgasgasg",
+      "skills": [
+        "dgasgd"
+      ],
+      "status": "draft",
+      "updatedAt": "2023-10-04T17:04:58.521Z",
+      "createdAt": "2023-10-04T17:04:58.521Z"
+    },
+    {
+      "id": 5,
+      "title": "asfasf",
+      "description": "asfasfasfsafsafasf",
+      "skills": [
+        "safasfasf"
+      ],
+      "status": "draft",
+      "updatedAt": "2023-10-04T17:06:13.098Z",
+      "createdAt": "2023-10-04T17:06:11.026Z"
+    },
+    {
+      "id": 6,
+      "title": "Agora vai dar",
+      "description": "vamos a istofwqwrqwr",
+      "skills": [
+        "asfasf"
+      ],
+      "status": "published",
+      "updatedAt": "2023-10-04T17:09:13.554Z",
+      "createdAt": "2023-10-04T17:07:34.627Z"
+    }
   ],
-  "invoices": []
+  "invoices": [
+    {
+      "jobAdId": 6,
+      "amount": 15,
+      "updatedAt": "2023-10-04T17:07:42.703Z",
+      "createdAt": "2023-10-04T17:07:42.703Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 1
+    },
+    {
+      "jobAdId": 6,
+      "amount": 15,
+      "updatedAt": "2023-10-04T17:07:52.568Z",
+      "createdAt": "2023-10-04T17:07:52.568Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 2
+    },
+    {
+      "jobAdId": 6,
+      "amount": 15,
+      "updatedAt": "2023-10-04T17:08:49.835Z",
+      "createdAt": "2023-10-04T17:08:49.835Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 3
+    },
+    {
+      "jobAdId": 6,
+      "amount": 15,
+      "updatedAt": "2023-10-04T17:09:13.577Z",
+      "createdAt": "2023-10-04T17:09:13.577Z",
+      "dueDate": "2023-11-30T00:00:00.000Z",
+      "id": 4
+    }
+  ]
 }
