@@ -26,7 +26,7 @@ const defaultJobAd = <JobAd>{
 };
 describe('JobsListComponent', () => {
   let spectator: Spectator<JobsListComponent>;
-  let store: MockStore;
+  let store: MockStore<JobsListStateEvents>;
 
   const initialState: JobsListState = {
     jobsList: [],
@@ -73,31 +73,46 @@ describe('JobsListComponent', () => {
     store = spectator.inject(MockStore);
   });
 
-  afterEach(() => {
-    store?.resetSelectors();
-  });
-
-  it('should find an element of the list', async () => {
+  it('should get the correct number of jobs from the store', async () => {
     // GIVEN
-    store.overrideSelector(selectJobsList, [{ ...defaultJobAd }, { ...defaultJobAd, id: 2 }]);
-
-    store.refreshState();
+    const result = selectJobsList.projector({
+      ...initialState,
+      jobsList: [{ ...defaultJobAd }, { ...defaultJobAd, id: 2 }, { ...defaultJobAd, id: 3 }],
+    });
 
     // WHEN
     spectator.component.ngOnInit();
     spectator.detectChanges();
 
-    // Wait for the async operation to complete
-    await spectator.fixture.whenStable();
+    // THEN
+    expect(result.length).toEqual(3);
+  });
+
+  it('should show the table if we have at least one job ad', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsList, [<JobAd>{ id: 1 }]);
+    store.refreshState();
+
+    // WHEN
+    spectator.component.ngOnInit();
+    spectator.detectComponentChanges();
 
     // THEN
+    expect(spectator.query('app-jobs-list-table')).toExist();
+    expect(spectator.query('app-no-results')).not.toExist();
+  });
+
+  it('should show the no results component if we have no job ads', async () => {
+    // GIVEN
+    store.overrideSelector(selectJobsList, []);
+    store.refreshState();
+
+    // WHEN
+    spectator.component.ngOnInit();
+    spectator.detectComponentChanges();
 
     // THEN
-    expect(
-      selectJobsListTotalCount.projector({
-        ...initialState,
-        totalCount: 2,
-      }),
-    ).toEqual(2);
+    expect(spectator.query('app-jobs-list-table')).not.toExist();
+    expect(spectator.query('app-no-results')).toExist();
   });
 });
